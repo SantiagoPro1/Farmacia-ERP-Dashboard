@@ -1,0 +1,10 @@
+{
+  "description": "Streamline pharmacy management with a comprehensive ERP system for healthcare institutions, enabling efficient prescription processing, inventory control, and voucher management.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

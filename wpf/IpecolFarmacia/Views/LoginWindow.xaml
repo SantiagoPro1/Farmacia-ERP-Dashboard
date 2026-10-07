@@ -1,0 +1,116 @@
+<Window x:Class="IpecolFarmacia.Views.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="IPECOL · Inicio de Sesión" 
+        Height="585" Width="766" 
+        Background="{x:Null}" 
+        AllowsTransparency="True" 
+        WindowStyle="None" 
+        WindowStartupLocation="CenterScreen"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+  
+  <Grid>
+    <!-- Rectángulo Trasero (Vino Oficial IPECOL con bordes redondeados y sombra suave, exacto a IUBI) -->
+    <Rectangle HorizontalAlignment="Center" Height="459" Margin="0,47.5,0,38.5" VerticalAlignment="Center" Width="726" RadiusX="5" RadiusY="5">
+      <Rectangle.Effect>
+        <DropShadowEffect Color="Black" BlurRadius="25" Opacity="0.35" ShadowDepth="4" Direction="270"/>
+      </Rectangle.Effect>
+      <Rectangle.Fill>
+        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+          <GradientStop Color="#8B1D41" Offset="0.15"/>
+          <GradientStop Color="#5A1829" Offset="0.85"/>
+        </LinearGradientBrush>
+      </Rectangle.Fill>
+    </Rectangle>
+
+    <!-- Rectángulo Blanco Flotante (Efecto recortado superpuesto de 545px de alto vs 459px del fondo vino) -->
+    <Rectangle Margin="342,0,70,0" Fill="White" RadiusX="5" RadiusY="5" Width="314" Height="545" HorizontalAlignment="Left" VerticalAlignment="Center">
+      <Rectangle.Effect>
+        <DropShadowEffect Color="Black" BlurRadius="25" Opacity="0.25" ShadowDepth="4" Direction="270"/>
+      </Rectangle.Effect>
+    </Rectangle>
+
+    <!-- Contenedor del Formulario dentro de la Tarjeta Blanca -->
+    <Grid Margin="342,0,70,0" Width="314" Height="545" HorizontalAlignment="Left" VerticalAlignment="Center">
+      <!-- Botón de Apagar / Salir en la esquina superior derecha (exacto a la captura de pantalla de IUBI) -->
+      <Canvas>
+        <Button Background="#B22222" BorderBrush="{x:Null}" Padding="0" BorderThickness="0" Cursor="Hand" 
+                Canvas.Left="262" Canvas.Top="20" Width="32" Height="32"
+                Click="PowerOff_Click" ToolTip="Cerrar Sistema">
+          <Button.Template>
+            <ControlTemplate TargetType="Button">
+              <Border Background="{TemplateBinding Background}" CornerRadius="4">
+                <Path Data="M 12,3 L 12,10 M 6.5,6.5 A 7,7 0 1 0 17.5,6.5" 
+                      Stroke="White" StrokeThickness="2" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                      Width="14" Height="14" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+              </Border>
+            </ControlTemplate>
+          </Button.Template>
+        </Button>
+      </Canvas>
+
+      <!-- Formulario Central de Inicio de Sesión -->
+      <StackPanel Margin="38,65,38,20" Width="238">
+        <!-- Logotipo Oficial IPECOL (archivo ipecol-full.png el rojito oficial de assets) -->
+        <Image Height="125" Width="238" Margin="0,0,0,14" Source="/Assets/ipecol-full.png" Stretch="Uniform"/>
+
+        <!-- Campo Usuario con estilo de línea inferior idéntico al sistema original -->
+        <TextBlock Text="Usuario" FontSize="15" FontWeight="Normal" Foreground="#718096" Margin="0,8,0,0"/>
+        <TextBox x:Name="UserBox" 
+                 Height="32" 
+                 FontSize="15" FontWeight="Medium" Foreground="{StaticResource InkBrush}"
+                 Padding="0,4" 
+                 BorderThickness="0,0,0,1" 
+                 BorderBrush="#A0AEC0" 
+                 Background="Transparent"
+                 Margin="0,0,0,16"/>
+
+        <!-- Campo Contraseña con estilo de línea inferior idéntico al sistema original -->
+        <TextBlock Text="Contraseña" FontSize="15" FontWeight="Normal" Foreground="#718096" Margin="0,6,0,0"/>
+        <PasswordBox x:Name="PassBox" 
+                     Height="32" 
+                     FontSize="15" 
+                     Padding="0,4" 
+                     BorderThickness="0,0,0,1" 
+                     BorderBrush="#A0AEC0" 
+                     Background="Transparent"
+                     Margin="0,0,0,22"/>
+
+        <!-- Mensaje de Error si aplica -->
+        <TextBlock x:Name="ErrorText" Foreground="{StaticResource Wine700Brush}" FontSize="11" FontWeight="SemiBold" Margin="0,0,0,8" Visibility="Collapsed" TextWrapping="Wrap"/>
+
+        <!-- Botón Iniciar Sesión en Rojo/Vino Oficial IPECOL con sombra suave -->
+        <Button Content="Iniciar Sesión" 
+                Height="42" Width="238" 
+                FontSize="18" FontWeight="Bold" 
+                Foreground="White" 
+                Background="#8B1D41" 
+                BorderBrush="#8B1D41"
+                Cursor="Hand"
+                IsDefault="True"
+                Click="Login_Click">
+          <Button.Template>
+            <ControlTemplate TargetType="Button">
+              <Border x:Name="btnBorder" Background="{TemplateBinding Background}" CornerRadius="6">
+                <Border.Effect>
+                  <DropShadowEffect ShadowDepth="2" BlurRadius="10" Opacity="0.3" Color="Black"/>
+                </Border.Effect>
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+              </Border>
+              <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                  <Setter TargetName="btnBorder" Property="Background" Value="#A0234B"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                  <Setter TargetName="btnBorder" Property="Background" Value="#6E1F33"/>
+                </Trigger>
+              </ControlTemplate.Triggers>
+            </ControlTemplate>
+          </Button.Template>
+        </Button>
+
+        
+      </StackPanel>
+    </Grid>
+  </Grid>
+</Window>
