@@ -80,60 +80,6 @@
       </Style.Triggers>
     </Style>
 
-    <Style x:Key="ReimpresionViewStyle" TargetType="Border">
-      <Setter Property="Visibility" Value="Collapsed"/>
-      <Style.Triggers>
-        <DataTrigger Binding="{Binding VistaActual}" Value="Reimpresion">
-          <Setter Property="Visibility" Value="Visible"/>
-        </DataTrigger>
-      </Style.Triggers>
-    </Style>
-
-    <Style x:Key="InfoRecetaViewStyle" TargetType="Border">
-      <Setter Property="Visibility" Value="Collapsed"/>
-      <Style.Triggers>
-        <DataTrigger Binding="{Binding VistaActual}" Value="InfoReceta">
-          <Setter Property="Visibility" Value="Visible"/>
-        </DataTrigger>
-      </Style.Triggers>
-    </Style>
-
-    <Style x:Key="ReporteComprasViewStyle" TargetType="Border">
-      <Setter Property="Visibility" Value="Collapsed"/>
-      <Style.Triggers>
-        <DataTrigger Binding="{Binding VistaActual}" Value="ReporteCompras">
-          <Setter Property="Visibility" Value="Visible"/>
-        </DataTrigger>
-      </Style.Triggers>
-    </Style>
-
-    <Style x:Key="ReporteEntregasViewStyle" TargetType="Border">
-      <Setter Property="Visibility" Value="Collapsed"/>
-      <Style.Triggers>
-        <DataTrigger Binding="{Binding VistaActual}" Value="ReporteEntregas">
-          <Setter Property="Visibility" Value="Visible"/>
-        </DataTrigger>
-      </Style.Triggers>
-    </Style>
-
-    <Style x:Key="ReporteEntradasViewStyle" TargetType="Border">
-      <Setter Property="Visibility" Value="Collapsed"/>
-      <Style.Triggers>
-        <DataTrigger Binding="{Binding VistaActual}" Value="ReporteEntradas">
-          <Setter Property="Visibility" Value="Visible"/>
-        </DataTrigger>
-      </Style.Triggers>
-    </Style>
-
-    <Style x:Key="UsuariosViewStyle" TargetType="Border">
-      <Setter Property="Visibility" Value="Collapsed"/>
-      <Style.Triggers>
-        <DataTrigger Binding="{Binding VistaActual}" Value="Usuarios">
-          <Setter Property="Visibility" Value="Visible"/>
-        </DataTrigger>
-      </Style.Triggers>
-    </Style>
-
     <Style x:Key="BienvenidaViewStyle" TargetType="Border">
       <Setter Property="Visibility" Value="Collapsed"/>
       <Style.Triggers>
@@ -150,11 +96,10 @@
 
   <Grid>
     <Grid.RowDefinitions>
-      <!-- 1. Línea superior institucional (Vino IPECOL) -->
       <RowDefinition Height="5"/>
-      <!-- 2. Barra Superior de Control & Usuario -->
+      <!-- 2. Barra Superior Global estilo IUBI -->
       <RowDefinition Height="46"/>
-      <!-- 3. Contenido Principal (Sidebar Lateral Izquierdo + Área de Trabajo) -->
+      <!-- 3. Contenido Principal (Sidebar + Workspace) -->
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
 
@@ -164,12 +109,12 @@
     <Border Grid.Row="0" Background="{StaticResource Wine800Brush}" MouseLeftButtonDown="TopLine_MouseLeftButtonDown" Cursor="SizeAll"/>
 
     <!-- ======================================================== -->
-    <!-- 2. BARRA DE TÍTULO SUPERIOR (ESTILO INSTITUCIONAL CON NOMBRE CENTRADO) -->
+    <!-- 2. BARRA DE TÍTULO SUPERIOR (ESTILO IUBI CON NOMBRE CENTRADO) -->
     <!-- ======================================================== -->
     <Border Grid.Row="1" Background="White" BorderBrush="{StaticResource Sand100Brush}" BorderThickness="0,0,0,1" Padding="14,0">
       <Grid>
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="280"/>
+          <ColumnDefinition Width="250"/>
           <ColumnDefinition Width="*"/>
           <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
@@ -179,24 +124,14 @@
           <Border Background="{StaticResource Rose100Brush}" CornerRadius="4" Padding="6,2" Margin="0,0,8,0">
             <TextBlock Text="FARMACIA" FontWeight="Bold" FontSize="10" Foreground="{StaticResource Wine900Brush}"/>
           </Border>
-          <TextBlock Text="{Binding VistaActual}" FontWeight="Bold" FontSize="12.5" Foreground="{StaticResource Wine950Brush}" VerticalAlignment="Center"/>
-          <Border Background="#FEFCBF" BorderBrush="#ECC94B" BorderThickness="1" CornerRadius="4" Padding="6,2" Margin="8,0,0,0" VerticalAlignment="Center">
-            <TextBlock Text="🧪 IUBIDB_FARMACIAS_PRUEBAS · ESCRITURA HABILITADA" FontWeight="Bold" FontSize="9.5" Foreground="#744210"/>
-          </Border>
+          <TextBlock Text="{Binding VistaActual}" FontWeight="Bold" FontSize="13" Foreground="{StaticResource Wine950Brush}" VerticalAlignment="Center"/>
         </StackPanel>
 
-        <!-- Centro: Nombre del Usuario Activo Real Autenticado y su Rol -->
+        <!-- Centro: Nombre del Usuario Activo Real Autenticado -->
         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-          <TextBlock Text="{Binding UsuarioNombreCompleto}" FontWeight="Bold" FontSize="13" Foreground="#2D3748" VerticalAlignment="Center"/>
-          <Border Background="{Binding UsuarioRolColor}" CornerRadius="10" Padding="8,2" Margin="10,0,8,0" VerticalAlignment="Center">
-            <TextBlock Text="{Binding UsuarioRolBadge}" FontSize="10" FontWeight="Bold" Foreground="White"/>
-          </Border>
-          <Button Style="{StaticResource TopSystemButton}" ToolTip="Cerrar sesión o probar otro perfil de usuario" Click="BtnCerrarSesion_Click" Margin="4,0,0,0">
-            <StackPanel Orientation="Horizontal">
-              <TextBlock Text="🔄" FontSize="11" Margin="0,0,4,0"/>
-              <TextBlock Text="Cambiar Rol" FontSize="11" FontWeight="SemiBold" Foreground="{StaticResource Wine900Brush}"/>
-            </StackPanel>
-          </Button>
+          <TextBlock Text="{Binding UsuarioNombreCompleto}" FontWeight="Bold" FontSize="13" Foreground="#4A5568"/>
+          <TextBlock Text=" · " FontSize="13" Foreground="#A0AEC0"/>
+          <TextBlock Text="{Binding UsuarioPerfilInfo}" FontSize="11" Foreground="#718096" VerticalAlignment="Center"/>
         </StackPanel>
 
         <!-- Derecha: Botones de Sistema estilo IUBI -->
@@ -233,7 +168,7 @@
             <TextBlock Text="🗖" FontSize="11"/>
           </Button>
 
-          <!-- Botón de Apagado / Salir (Rojo institucional) -->
+          <!-- Botón de Apagado / Salir (Rojo institucional exacto a IUBI) -->
           <Button Width="32" Height="32" Background="#B22222" BorderBrush="{x:Null}" Padding="0" Cursor="Hand" Margin="2,0,0,0" ToolTip="Salir del Sistema" Click="BtnSalir_Click">
             <Button.Template>
               <ControlTemplate TargetType="Button">
@@ -250,25 +185,26 @@
     </Border>
 
     <!-- ======================================================== -->
-    <!-- 3. CUERPO PRINCIPAL (MENÚ LATERAL IZQUIERDO COMPLETO + ÁREA DE TRABAJO) -->
+    <!-- 3. CUERPO PRINCIPAL (SIDEBAR ESTILO IUBI + ÁREA DE VISTAS) -->
     <!-- ======================================================== -->
     <Grid Grid.Row="2">
       <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="255"/>
+        <ColumnDefinition Width="240"/>
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
 
-      <!-- BARRA LATERAL INSTITUCIONAL IPECOL -->
+      <!-- BARRA LATERAL INSTITUCIONAL IPECOL (VINO #5A1829 CON LOGO ROJITO OFICIAL EN TARJETA BLANCA) -->
       <Border Grid.Column="0" Background="{StaticResource Wine900Brush}">
         <DockPanel>
-          <!-- Logo Superior IPECOL -->
-          <Border DockPanel.Dock="Top" Background="#3D101C" Padding="12,12" BorderThickness="0,0,0,1" BorderBrush="#6E1F33">
+          <!-- Logo Superior IPECOL (El rojito oficial de assets en tarjeta blanca nítida) -->
+          <Border DockPanel.Dock="Top" Background="#3D101C" Padding="14,14" BorderThickness="0,0,0,1" BorderBrush="#6E1F33">
             <StackPanel HorizontalAlignment="Center">
-              <Border Background="White" CornerRadius="8" Padding="10,8" Margin="0,0,0,6">
-                <Image Source="/Assets/ipecol-full.png" MaxHeight="52" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"/>
+              <!-- Tarjeta blanca nítida para el logo rojito oficial -->
+              <Border Background="White" CornerRadius="8" Padding="12,10" Margin="0,0,0,6">
+                <Image Source="/Assets/ipecol-full.png" MaxHeight="60" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"/>
               </Border>
-              <Border Background="{StaticResource Gold100Brush}" CornerRadius="4" Padding="8,2" HorizontalAlignment="Center">
-                <TextBlock Text="FARMACIA INSTITUCIONAL" FontSize="9" FontWeight="Bold" Foreground="{StaticResource Wine900Brush}"/>
+              <Border Background="{StaticResource Gold100Brush}" CornerRadius="4" Padding="8,3" HorizontalAlignment="Center">
+                <TextBlock Text="FARMACIA INSTITUCIONAL" FontSize="9.5" FontWeight="Bold" Foreground="{StaticResource Wine900Brush}"/>
               </Border>
             </StackPanel>
           </Border>
@@ -276,88 +212,55 @@
           <!-- Estado de Base de Datos en el pie de página -->
           <Border DockPanel.Dock="Bottom" Background="#3D101C" Padding="14,10" BorderThickness="0,1,0,0" BorderBrush="#6E1F33">
             <DockPanel>
-              <TextBlock DockPanel.Dock="Left" Text="🧪" FontSize="11" Margin="0,0,8,0" VerticalAlignment="Center"/>
+              <TextBlock DockPanel.Dock="Left" Text="🟢" FontSize="11" Margin="0,0,8,0" VerticalAlignment="Center"/>
               <StackPanel VerticalAlignment="Center">
-                <TextBlock Text="IUBIDB_FARMACIAS_PRUEBAS" FontSize="10" FontWeight="Bold" Foreground="White"/>
-                <TextBlock Text="10.10.24.247 · Escritura Habilitada" FontSize="9" Foreground="#F6E05E"/>
+                <TextBlock Text="IUBIDB_FARMACIAS" FontSize="10.5" FontWeight="Bold" Foreground="White"/>
+                <TextBlock Text="10.10.24.247 · Solo Lectura" FontSize="9" Foreground="#D9A3A0"/>
               </StackPanel>
             </DockPanel>
           </Border>
 
-          <!-- Menú de Módulos (Exacto a las secciones de las capturas) -->
+          <!-- Menú de Módulos (Estilo institucional con selección en pastilla blanca) -->
           <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="0,6,0,0">
-              <!-- SECCIÓN 1: ALTA DE MEDICAMENTOS -->
-              <TextBlock Text="ALTA DE MEDICAMENTOS" FontSize="9.5" FontWeight="Bold" Foreground="#D9A3A0" Margin="16,8,16,4"
-                         Visibility="{Binding PuedeVerSeccionAlta, Converter={StaticResource BoolToVis}}"/>
-              <RadioButton Content="🚚  COMPRAS DE MEDICAMENTO" Style="{StaticResource NavButton}" GroupName="nav"
-                           IsChecked="{Binding EsVistaCompras, Mode=OneWay}"
-                           Command="{Binding AbrirPestanaCommand}" CommandParameter="Compras"
-                           Visibility="{Binding PuedeVerCompras, Converter={StaticResource BoolToVis}}"/>
+              <TextBlock Text="OPERACIÓN" FontSize="10" FontWeight="Bold" Foreground="#D9A3A0" Margin="16,10,16,6"/>
 
-              <!-- SECCIÓN 2: SALIDA DE MEDICAMENTOS -->
-              <TextBlock Text="SALIDA DE MEDICAMENTOS" FontSize="9.5" FontWeight="Bold" Foreground="#D9A3A0" Margin="16,12,16,4"
-                         Visibility="{Binding PuedeVerSeccionSalida, Converter={StaticResource BoolToVis}}"/>
-              <RadioButton Content="🏪  ENTREGA DE MEDICAMENTO" Style="{StaticResource NavButton}" GroupName="nav" 
+              <RadioButton Content="🏪  VENTANILLA &amp; RECETAS" Style="{StaticResource NavButton}" GroupName="nav" 
+                           Visibility="{Binding PuedeVerVentanilla, Converter={StaticResource BoolToVis}}"
                            IsChecked="{Binding EsVistaVentanilla, Mode=OneWay}"
-                           Command="{Binding AbrirPestanaCommand}" CommandParameter="Ventanilla"
-                           Visibility="{Binding PuedeVerVentanilla, Converter={StaticResource BoolToVis}}"/>
-              <RadioButton Content="🎫  SURTIR VALE" Style="{StaticResource NavButton}" GroupName="nav"
+                           Command="{Binding AbrirPestanaCommand}" CommandParameter="Ventanilla"/>
+
+              <RadioButton Content="🎫  SURTIDO DE VALES" Style="{StaticResource NavButton}" GroupName="nav"
+                           Visibility="{Binding PuedeVerVales, Converter={StaticResource BoolToVis}}"
                            IsChecked="{Binding EsVistaVales, Mode=OneWay}"
-                           Command="{Binding AbrirPestanaCommand}" CommandParameter="Vales"
-                           Visibility="{Binding PuedeVerVales, Converter={StaticResource BoolToVis}}"/>
-              <RadioButton Content="🖨️  REIMPRESIÓN" Style="{StaticResource NavButton}" GroupName="nav"
-                           IsChecked="{Binding EsVistaReimpresion, Mode=OneWay}"
-                           Command="{Binding AbrirPestanaCommand}" CommandParameter="Reimpresion"
-                           Visibility="{Binding PuedeVerReimpresion, Converter={StaticResource BoolToVis}}"/>
-              <RadioButton Content="ℹ️  INFORMACIÓN DE RECETA" Style="{StaticResource NavButton}" GroupName="nav"
-                           IsChecked="{Binding EsVistaInfoReceta, Mode=OneWay}"
-                           Command="{Binding AbrirPestanaCommand}" CommandParameter="InfoReceta"
-                           Visibility="{Binding PuedeVerInfoReceta, Converter={StaticResource BoolToVis}}"/>
+                           Command="{Binding AbrirPestanaCommand}" CommandParameter="Vales"/>
 
-              <!-- SECCIÓN 3: INFORMES -->
-              <TextBlock Text="INFORMES" FontSize="9.5" FontWeight="Bold" Foreground="#D9A3A0" Margin="16,12,16,4"
-                         Visibility="{Binding PuedeVerSeccionInformes, Converter={StaticResource BoolToVis}}"/>
-              <RadioButton Content="📦  EXISTENCIAS (FEFO)" Style="{StaticResource NavButton}" GroupName="nav"
+              <RadioButton Content="📦  INVENTARIO &amp; LOTES (FEFO)" Style="{StaticResource NavButton}" GroupName="nav"
+                           Visibility="{Binding PuedeVerInventario, Converter={StaticResource BoolToVis}}"
                            IsChecked="{Binding EsVistaInventario, Mode=OneWay}"
-                           Command="{Binding AbrirPestanaCommand}" CommandParameter="Inventario"
-                           Visibility="{Binding PuedeVerInventario, Converter={StaticResource BoolToVis}}"/>
-              <RadioButton Content="📊  REPORTE DE COMPRAS" Style="{StaticResource NavButton}" GroupName="nav"
-                           IsChecked="{Binding EsVistaReporteCompras, Mode=OneWay}"
-                           Command="{Binding AbrirPestanaCommand}" CommandParameter="ReporteCompras"
-                           Visibility="{Binding PuedeVerReporteCompras, Converter={StaticResource BoolToVis}}"/>
-              <RadioButton Content="📋  REPORTE ENTREGA MED." Style="{StaticResource NavButton}" GroupName="nav"
-                           IsChecked="{Binding EsVistaReporteEntregas, Mode=OneWay}"
-                           Command="{Binding AbrirPestanaCommand}" CommandParameter="ReporteEntregas"
-                           Visibility="{Binding PuedeVerReporteEntregas, Converter={StaticResource BoolToVis}}"/>
-              <RadioButton Content="🚚  REPORTE ENTRADAS MED." Style="{StaticResource NavButton}" GroupName="nav"
-                           IsChecked="{Binding EsVistaReporteEntradas, Mode=OneWay}"
-                           Command="{Binding AbrirPestanaCommand}" CommandParameter="ReporteEntradas"
-                           Visibility="{Binding PuedeVerReporteEntradas, Converter={StaticResource BoolToVis}}"/>
+                           Command="{Binding AbrirPestanaCommand}" CommandParameter="Inventario"/>
 
-              <!-- SECCIÓN 4: GESTIÓN & PADRÓN -->
-              <TextBlock Text="PADRÓN &amp; AUDITORÍA" FontSize="9.5" FontWeight="Bold" Foreground="#D9A3A0" Margin="16,12,16,4"
-                         Visibility="{Binding PuedeVerSeccionPadron, Converter={StaticResource BoolToVis}}"/>
+              <TextBlock Text="GESTIÓN &amp; REPORTES" FontSize="10" FontWeight="Bold" Foreground="#D9A3A0" Margin="16,14,16,6"/>
+
               <RadioButton Content="👥  PADRÓN DERECHOHABIENTES" Style="{StaticResource NavButton}" GroupName="nav"
+                           Visibility="{Binding PuedeVerPacientes, Converter={StaticResource BoolToVis}}"
                            IsChecked="{Binding EsVistaPacientes, Mode=OneWay}"
-                           Command="{Binding AbrirPestanaCommand}" CommandParameter="Pacientes"
-                           Visibility="{Binding PuedeVerPacientes, Converter={StaticResource BoolToVis}}"/>
-              <RadioButton Content="📜  KARDEX AUDITABLE" Style="{StaticResource NavButton}" GroupName="nav"
-                           IsChecked="{Binding EsVistaKardex, Mode=OneWay}"
-                           Command="{Binding AbrirPestanaCommand}" CommandParameter="Kardex"
-                           Visibility="{Binding PuedeVerKardex, Converter={StaticResource BoolToVis}}"/>
-              <RadioButton Content="📊  RESUMEN DE CIERRES" Style="{StaticResource NavButton}" GroupName="nav"
-                           IsChecked="{Binding EsVistaReportes, Mode=OneWay}"
-                           Command="{Binding AbrirPestanaCommand}" CommandParameter="Reportes"
-                           Visibility="{Binding PuedeVerReportes, Converter={StaticResource BoolToVis}}"/>
+                           Command="{Binding AbrirPestanaCommand}" CommandParameter="Pacientes"/>
 
-              <!-- SECCIÓN 5: ADMINISTRACIÓN (SÓLO ADMINISTRADOR) -->
-              <TextBlock Text="ADMINISTRACIÓN SISTEMA" FontSize="9.5" FontWeight="Bold" Foreground="#D9A3A0" Margin="16,12,16,4"
-                         Visibility="{Binding PuedeVerGestionUsuarios, Converter={StaticResource BoolToVis}}"/>
-              <RadioButton Content="👤  GESTIÓN DE USUARIOS" Style="{StaticResource NavButton}" GroupName="nav"
-                           IsChecked="{Binding EsVistaUsuarios, Mode=OneWay}"
-                           Command="{Binding AbrirPestanaCommand}" CommandParameter="Usuarios"
-                           Visibility="{Binding PuedeVerGestionUsuarios, Converter={StaticResource BoolToVis}}"/>
+              <RadioButton Content="📋  KARDEX AUDITABLE" Style="{StaticResource NavButton}" GroupName="nav"
+                           Visibility="{Binding PuedeVerKardex, Converter={StaticResource BoolToVis}}"
+                           IsChecked="{Binding EsVistaKardex, Mode=OneWay}"
+                           Command="{Binding AbrirPestanaCommand}" CommandParameter="Kardex"/>
+
+              <RadioButton Content="🚚  ENTRADAS POR COMPRA" Style="{StaticResource NavButton}" GroupName="nav"
+                           Visibility="{Binding PuedeVerCompras, Converter={StaticResource BoolToVis}}"
+                           IsChecked="{Binding EsVistaCompras, Mode=OneWay}"
+                           Command="{Binding AbrirPestanaCommand}" CommandParameter="Compras"/>
+
+              <RadioButton Content="📊  REPORTES &amp; CIERRES" Style="{StaticResource NavButton}" GroupName="nav"
+                           Visibility="{Binding PuedeVerReportes, Converter={StaticResource BoolToVis}}"
+                           IsChecked="{Binding EsVistaReportes, Mode=OneWay}"
+                           Command="{Binding AbrirPestanaCommand}" CommandParameter="Reportes"/>
             </StackPanel>
           </ScrollViewer>
         </DockPanel>
@@ -630,7 +533,7 @@
                     <StackPanel>
                       <TextBlock Text="FOLIO RECETA ACTIVA" Style="{StaticResource Caption}"/>
                       <TextBlock Text="{Binding FolioReceta}" FontSize="18" FontWeight="Bold" Foreground="{StaticResource Wine900Brush}" Margin="0,4,0,0"/>
-                      <TextBlock Text="{Binding Vigencia}" FontSize="9.5" Foreground="#38A169" Margin="0,2,0,0"/>
+                      <TextBlock Text="Firma Electrónica Válida" FontSize="9.5" Foreground="#38A169" Margin="0,2,0,0"/>
                     </StackPanel>
                   </Border>
                 </Grid>
@@ -698,22 +601,13 @@
                             <TextBlock Text="{Binding Alergias}" FontSize="10" FontWeight="SemiBold" Foreground="{StaticResource Wine700Brush}"/>
                           </Border>
                           <Border Background="{StaticResource Sand50Brush}" BorderBrush="{StaticResource Sand100Brush}" BorderThickness="1" CornerRadius="4" Padding="8,3">
-                            <TextBlock Text="{Binding TipoAfiliacion}" FontSize="10" Foreground="#4A5568"/>
+                            <TextBlock Text="Sin adeudos" FontSize="10" Foreground="#4A5568"/>
                           </Border>
                         </WrapPanel>
 
-                        <!-- Botón Historial de Entregas 15 Días (Paridad MedicineOutputWindow txtHistory) -->
-                        <Button Content="📋 Historial de entregas (últimos 15 días)" Style="{StaticResource SoftButton}"
-                                Margin="0,8,0,0" Padding="8,5" FontSize="11" HorizontalAlignment="Stretch"
-                                Command="{Binding AbrirModalHistorial15DiasCommand}"/>
-
                         <!-- Selector de Beneficiario / Titular (Paridad MedicineOutputWindow) -->
                         <StackPanel Visibility="{Binding TieneBeneficiarios, Converter={StaticResource BoolToVis}}" Margin="0,8,0,0">
-                          <DockPanel Margin="0,0,0,2">
-                            <Button DockPanel.Dock="Right" Content="+ Beneficiario" Style="{StaticResource GhostButton}" FontSize="10" Padding="4,1"
-                                    Command="{Binding AbrirModalNuevoBeneficiarioCommand}"/>
-                            <TextBlock Text="ATENDER A (TITULAR O BENEFICIARIO)" Style="{StaticResource Caption}" Foreground="{StaticResource Wine900Brush}"/>
-                          </DockPanel>
+                          <TextBlock Text="ATENDER A (TITULAR O BENEFICIARIO)" Style="{StaticResource Caption}" Foreground="{StaticResource Wine900Brush}"/>
                           <ComboBox ItemsSource="{Binding BeneficiariosList}" SelectedItem="{Binding BeneficiarioSeleccionado}"
                                     DisplayMemberPath="DisplayText" Height="26" FontSize="11" Margin="0,2,0,0"/>
                         </StackPanel>
@@ -760,7 +654,7 @@
                         </Grid>
 
                         <Border Background="{StaticResource Gold100Brush}" CornerRadius="6" Padding="10,5" Margin="0,4,0,0">
-                          <TextBlock Text="{Binding PartidasResumenDisponibles}" FontSize="11" FontWeight="Bold" Foreground="{StaticResource Wine900Brush}"/>
+                          <TextBlock Text="✔ Receta válida · Firma electrónica verificada" FontSize="11" FontWeight="Bold" Foreground="{StaticResource Wine900Brush}"/>
                         </Border>
                       </StackPanel>
                     </Border>
@@ -851,10 +745,10 @@
                           </DataGridTemplateColumn>
                           <DataGridTextColumn Header="PRECIO" Binding="{Binding Precio, StringFormat=C}" Width="80"/>
                           <DataGridTextColumn Header="IMPORTE" Binding="{Binding Importe, StringFormat=C}" Width="85"/>
-                          <DataGridTemplateColumn Header="ACCIÓN" Width="145">
+                          <DataGridTemplateColumn Header="ACCIÓN" Width="115">
                             <DataGridTemplateColumn.CellTemplate>
                               <DataTemplate>
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <StackPanel VerticalAlignment="Center">
                                   <Button Content="Surtir" Style="{StaticResource SoftButton}"
                                           Visibility="{Binding EsBotonSurtir, Converter={StaticResource BoolToVis}}"
                                           Command="{Binding DataContext.SurtirCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
@@ -869,11 +763,6 @@
                                           Visibility="{Binding Surtida, Converter={StaticResource BoolToVis}}">
                                     <TextBlock Text="✔ Surtido" FontSize="10" FontWeight="Bold" Foreground="#2F855A"/>
                                   </Border>
-
-                                  <Button Content="🗑️" ToolTip="Quitar medicamento de receta" Style="{StaticResource GhostButton}"
-                                          Margin="6,0,0,0" Padding="5,2" FontSize="11" Foreground="#E53E3E"
-                                          Command="{Binding DataContext.EliminarPartidaCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                          CommandParameter="{Binding}"/>
                                 </StackPanel>
                               </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -936,7 +825,7 @@
           </Border>
 
           <!-- ======================================================== -->
-          <!-- 2. VISTA: VALES SUBROGADOS DE FARMACIA EXTERNA (CouponSupplyWindow - Captura 101142) -->
+          <!-- 2. VISTA: VALES SUBROGADOS DE FARMACIA EXTERNA (Frm_Vales) -->
           <!-- ======================================================== -->
           <Border Style="{StaticResource ValesViewStyle}">
             <StackPanel>
@@ -948,278 +837,77 @@
                 </StackPanel>
 
                 <StackPanel>
-                  <TextBlock Text="Surtir Vale Subrogado (Farmacia Externa)" FontFamily="Georgia" FontSize="22" FontWeight="Bold" Foreground="{StaticResource Wine950Brush}"/>
-                  <TextBlock Text="Validación, consulta de historial previo de 15 días y surtido de vales autorizados por desabasto." Opacity="0.65" FontSize="12" Margin="0,2,0,0"/>
+                  <TextBlock Text="Control y Emisión de Vales Subrogados" FontFamily="Georgia" FontSize="22" FontWeight="Bold" Foreground="{StaticResource Wine950Brush}"/>
+                  <TextBlock Text="Canje y surtido de vales de farmacias privadas externas por desabasto en almacén central." Opacity="0.65" FontSize="12" Margin="0,2,0,0"/>
                 </StackPanel>
               </DockPanel>
 
-              <!-- Panel Superior: Captura de Folio & Datos del Derechohabiente (Exacto a CouponSupplyWindow Captura 101142) -->
-              <Grid Margin="0,0,0,16">
-                <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width="380"/>
-                  <ColumnDefinition Width="16"/>
-                  <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <!-- Columna Izquierda: Captura de Vale (Número de Vale Gigante + Badge INTERNO) -->
-                <Border Grid.Column="0" Style="{StaticResource Card}" Padding="16">
-                  <StackPanel>
-                    <DockPanel Margin="0,0,0,8">
-                      <Border DockPanel.Dock="Right" Background="{StaticResource Gold100Brush}" BorderBrush="{StaticResource Gold500Brush}" BorderThickness="1" CornerRadius="4" Padding="8,2">
-                        <TextBlock Text="INTERNO" FontSize="10" FontWeight="Bold" Foreground="{StaticResource Wine900Brush}"/>
-                      </Border>
-                      <TextBlock Text="NÚMERO DE VALE" Style="{StaticResource Caption}" Margin="0"/>
-                    </DockPanel>
-
-                    <Border Background="{StaticResource Sand50Brush}" BorderBrush="{StaticResource Sand100Brush}" BorderThickness="1.5" CornerRadius="8" Padding="10" Margin="0,4,0,10">
-                      <TextBox Text="{Binding FiltroVale, UpdateSourceTrigger=PropertyChanged}" 
-                               FontSize="32" FontWeight="Bold" Foreground="{StaticResource Wine900Brush}" 
-                               TextAlignment="Center" BorderThickness="0" Background="Transparent">
-                        <TextBox.InputBindings>
-                          <KeyBinding Key="Enter" Command="{Binding BuscarValePorFolioCommand}"/>
-                        </TextBox.InputBindings>
-                      </TextBox>
-                    </Border>
-
-                    <DockPanel Margin="0,0,0,10">
-                      <Border Background="{StaticResource Rose100Brush}" CornerRadius="4" Padding="8,4">
-                        <StackPanel Orientation="Horizontal">
-                          <TextBlock Text="Vencimiento: " FontSize="10.5" FontWeight="SemiBold" Foreground="{StaticResource Wine800Brush}"/>
-                          <TextBlock Text="{Binding ValeSeleccionado.FechaVencimiento}" FontSize="10.5" FontWeight="Bold" Foreground="#C53030"/>
-                        </StackPanel>
-                      </Border>
-                      <Button DockPanel.Dock="Right" Content="🔍 Buscar Vale" Style="{StaticResource PrimaryButton}" Padding="14,6" Command="{Binding BuscarValePorFolioCommand}"/>
-                    </DockPanel>
-                  </StackPanel>
-                </Border>
-
-                <!-- Columna Derecha: Información del Derechohabiente & Botón Historial 15 Días -->
-                <Border Grid.Column="2" Style="{StaticResource Card}" Background="#FAF5F0" BorderBrush="{StaticResource Sand100Brush}" Padding="16">
-                  <Grid>
-                    <Grid.RowDefinitions>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                      <ColumnDefinition Width="*"/>
-                      <ColumnDefinition Width="14"/>
-                      <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <!-- Derechohabiente (Carnet y Nombre) -->
-                    <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,0,10">
-                      <TextBlock Text="DERECHOHABIENTE (CARNET)" Style="{StaticResource Caption}"/>
-                      <Grid Margin="0,3,0,0">
-                        <Grid.ColumnDefinitions>
-                          <ColumnDefinition Width="120"/>
-                          <ColumnDefinition Width="8"/>
-                          <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0" Text="{Binding ValeSeleccionado.Carnet, Mode=OneWay}" IsReadOnly="True" Background="White" FontWeight="Bold" Padding="8,5"/>
-                        <TextBox Grid.Column="2" Text="{Binding ValeSeleccionado.PacienteNombre, Mode=OneWay}" IsReadOnly="True" Background="White" FontWeight="Bold" Padding="8,5"/>
-                      </Grid>
-                    </StackPanel>
-
-                    <!-- # de Receta y Fecha de Vale -->
-                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,0,12">
-                      <TextBlock Text="# DE RECETA" Style="{StaticResource Caption}"/>
-                      <TextBox Text="{Binding ValeSeleccionado.NumeroReceta, Mode=OneWay}" IsReadOnly="True" Background="White" Padding="8,5" Margin="0,3,0,0" FontWeight="SemiBold"/>
-                    </StackPanel>
-
-                    <StackPanel Grid.Row="1" Grid.Column="2" Margin="0,0,0,12">
-                      <TextBlock Text="FECHA DE EMISIÓN DE VALE" Style="{StaticResource Caption}"/>
-                      <TextBox Text="{Binding ValeSeleccionado.FechaEmision, Mode=OneWay}" IsReadOnly="True" Background="White" Padding="8,5" Margin="0,3,0,0"/>
-                    </StackPanel>
-
-                    <!-- Botón Destacado: Historial de Medicamentos Entregados en los Últimos 15 Días (Exacto a CouponSupplyWindow txtHistory) -->
-                    <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" 
-                            Command="{Binding AbrirModalHistorial15DiasCommand}"
-                            Background="{StaticResource Wine900Brush}" Foreground="White" BorderThickness="0" Padding="14,10" Cursor="Hand">
-                      <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                          <Border x:Name="bHist" Background="{TemplateBinding Background}" CornerRadius="6">
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                              <TextBlock Text="📋 " FontSize="13" VerticalAlignment="Center"/>
-                              <TextBlock Text="MEDICAMENTOS ENTREGADOS EN LOS ÚLTIMOS 15 DÍAS (HISTORIAL)" FontWeight="Bold" FontSize="11" Foreground="White" VerticalAlignment="Center"/>
-                            </StackPanel>
-                          </Border>
-                          <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                              <Setter TargetName="bHist" Property="Background" Value="{StaticResource Wine800Brush}"/>
-                            </Trigger>
-                          </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                      </Button.Template>
-                    </Button>
-                  </Grid>
-                </Border>
-              </Grid>
-
-              <!-- Panel Central: Detalle de Artículos Autorizados en el Vale (Subrogación Multi-Medicamento) -->
+              <!-- Tarjeta de Búsqueda y Verificación de Vale (Directa de CouponSupplyWindow) -->
               <Border Style="{StaticResource Card}" Margin="0,0,0,16">
-                <StackPanel>
-                  <!-- Cabecera y Resumen de Estado del Vale -->
-                  <DockPanel Margin="0,0,0,12">
-                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
-                      <Border Background="#FEFCBF" BorderBrush="#ECC94B" BorderThickness="1" CornerRadius="4" Padding="8,4" Margin="0,0,8,0"
-                              Visibility="{Binding EsModoSupervisionVales, Converter={StaticResource BoolToVis}}">
-                        <TextBlock Text="👀 MODO SUPERVISIÓN ADMIN" FontSize="10.5" FontWeight="Bold" Foreground="#744210"/>
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="380"/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="*"/>
+                  </Grid.ColumnDefinitions>
+
+                  <!-- Búsqueda rápida por Folio -->
+                  <StackPanel Grid.Column="0">
+                    <TextBlock Text="ESCANEAR O INGRESAR NO. DE VALE" Style="{StaticResource Caption}" Margin="0,0,0,6"/>
+                    <DockPanel>
+                      <Button DockPanel.Dock="Right" Content="Buscar" Style="{StaticResource PrimaryButton}" Margin="8,0,0,0" Command="{Binding BuscarValePorFolioCommand}"/>
+                      <Border Background="{StaticResource Sand50Brush}" BorderBrush="{StaticResource Sand100Brush}" BorderThickness="1" CornerRadius="6" Padding="10,6">
+                        <TextBox Text="{Binding FiltroVale, UpdateSourceTrigger=PropertyChanged}" 
+                                 FontSize="15" FontWeight="Bold" BorderThickness="0" Background="Transparent">
+                          <TextBox.InputBindings>
+                            <KeyBinding Key="Enter" Command="{Binding BuscarValePorFolioCommand}"/>
+                          </TextBox.InputBindings>
+                        </TextBox>
                       </Border>
-                      <Button Content="☑ Marcar Todos" Style="{StaticResource GhostButton}" Command="{Binding SeleccionarTodasLasPartidasValeCommand}" Margin="0,0,8,0"/>
-                      <Button Content="🖨️ Reimprimir Vale" Style="{StaticResource OutlineButton}" Command="{Binding ReimprimirValeCommand}" Margin="0,0,8,0"/>
-                      <Button Content="✔ Surtir Medicamentos Seleccionados" Style="{StaticResource PrimaryButton}" 
-                              Command="{Binding SurtirPartidasSeleccionadasValeCommand}"/>
-                    </StackPanel>
+                    </DockPanel>
+                    <TextBlock Text="Ejemplo: VAL-2026-0814 o teclea el carnet del paciente" FontSize="10" Foreground="#A0AEC0" Margin="0,4,0,0"/>
+                  </StackPanel>
 
-                    <StackPanel>
-                      <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <TextBlock Text="📋 Artículos Autorizados en el Vale" Style="{StaticResource CardTitle}" Margin="0,0,10,0"/>
-                        <Border Background="{Binding ValeSeleccionado.EstatusBadgeColor}" CornerRadius="4" Padding="8,2" VerticalAlignment="Center">
-                          <TextBlock Text="{Binding ValeSeleccionado.Estatus, StringFormat='ESTATUS: {0}'}" FontSize="10" FontWeight="Bold" Foreground="White"/>
-                        </Border>
-                      </StackPanel>
-                      <TextBlock FontSize="11" Foreground="#718096" Margin="0,2,0,0">
-                        <Run Text="Seleccione las casillas de los medicamentos a entregar. Si algún fármaco no está disponible, el vale continuará "/>
-                        <Run Text="ACTIVO" FontWeight="Bold" Foreground="{StaticResource Wine900Brush}"/>
-                        <Run Text=" con el saldo restante."/>
-                      </TextBlock>
-                    </StackPanel>
-                  </DockPanel>
-
-                  <!-- Barra de Resumen de Piezas -->
-                  <Border Background="{StaticResource Sand50Brush}" BorderBrush="{StaticResource Sand100Brush}" BorderThickness="1" CornerRadius="6" Padding="12,8" Margin="0,0,0,12">
+                  <!-- Ficha del Vale Activo -->
+                  <Border Grid.Column="2" Background="{StaticResource Rose100Brush}" CornerRadius="8" Padding="14">
                     <Grid>
                       <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
                       </Grid.ColumnDefinitions>
-                      <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
-                        <TextBlock Text="FARMACIA CONVENIO: " FontSize="10.5" FontWeight="Bold" Foreground="#718096"/>
-                        <TextBlock Text="{Binding ValeSeleccionado.FarmaciaSubrogada}" FontSize="11" FontWeight="SemiBold" Foreground="{StaticResource Wine900Brush}"/>
+                      <StackPanel Grid.Column="0">
+                        <TextBlock Text="FOLIO VALE" Style="{StaticResource Caption}"/>
+                        <TextBlock Text="{Binding ValeSeleccionado.NumeroVale}" FontWeight="Bold" FontSize="15" Foreground="{StaticResource Wine900Brush}"/>
+                        <TextBlock Text="DERECHOHABIENTE" Style="{StaticResource Caption}" Margin="0,6,0,0"/>
+                        <TextBlock Text="{Binding ValeSeleccionado.PacienteNombre}" FontWeight="SemiBold" FontSize="12"/>
                       </StackPanel>
-
-                      <Border Grid.Column="1" Background="White" CornerRadius="4" Padding="10,4" Margin="6,0" BorderBrush="{StaticResource Sand100Brush}" BorderThickness="1">
-                        <TextBlock FontSize="11">
-                          <Run Text="Total Fármacos: " Foreground="#718096"/>
-                          <Run Text="{Binding ValeSeleccionado.TotalMedicamentos, Mode=OneWay}" FontWeight="Bold"/>
-                        </TextBlock>
-                      </Border>
-
-                      <Border Grid.Column="2" Background="White" CornerRadius="4" Padding="10,4" Margin="6,0" BorderBrush="{StaticResource Sand100Brush}" BorderThickness="1">
-                        <TextBlock FontSize="11">
-                          <Run Text="Piezas Autorizadas: " Foreground="#718096"/>
-                          <Run Text="{Binding ValeSeleccionado.TotalPiezasAutorizadas, Mode=OneWay}" FontWeight="Bold" Foreground="{StaticResource Wine900Brush}"/>
-                        </TextBlock>
-                      </Border>
-
-                      <Border Grid.Column="3" Background="#F0FFF4" CornerRadius="4" Padding="10,4" Margin="6,0" BorderBrush="#9AE6B4" BorderThickness="1">
-                        <TextBlock FontSize="11">
-                          <Run Text="Surtidas: " Foreground="#276749"/>
-                          <Run Text="{Binding ValeSeleccionado.TotalPiezasSurtidas, Mode=OneWay}" FontWeight="Bold" Foreground="#22543D"/>
-                        </TextBlock>
-                      </Border>
-
-                      <Border Grid.Column="4" Background="#FFF5F5" CornerRadius="4" Padding="10,4" Margin="6,0" BorderBrush="#FEB2B2" BorderThickness="1">
-                        <TextBlock FontSize="11">
-                          <Run Text="Pendientes: " Foreground="#9B2C2C"/>
-                          <Run Text="{Binding ValeSeleccionado.TotalPiezasPendientes, Mode=OneWay}" FontWeight="Bold" Foreground="#C53030"/>
-                        </TextBlock>
-                      </Border>
+                      <StackPanel Grid.Column="1">
+                        <TextBlock Text="FARMACIA CONVENIO" Style="{StaticResource Caption}"/>
+                        <TextBlock Text="{Binding ValeSeleccionado.FarmaciaSubrogada}" FontWeight="SemiBold" FontSize="12" Foreground="{StaticResource Wine800Brush}"/>
+                        <TextBlock Text="VIGENCIA" Style="{StaticResource Caption}" Margin="0,6,0,0"/>
+                        <TextBlock Text="{Binding ValeSeleccionado.FechaVencimiento, StringFormat='Vence: {0}'}" FontSize="11" FontWeight="Bold" Foreground="#C53030"/>
+                      </StackPanel>
+                      <StackPanel Grid.Column="2" VerticalAlignment="Center" Margin="10,0,0,0">
+                        <Border Background="White" CornerRadius="4" Padding="8,4" HorizontalAlignment="Center">
+                          <TextBlock Text="{Binding ValeSeleccionado.Estatus}" FontWeight="Bold" FontSize="11" Foreground="{StaticResource Wine900Brush}"/>
+                        </Border>
+                        <Button Content="Surtir Vale" Style="{StaticResource PrimaryButton}" Margin="0,8,0,0" Command="{Binding SurtirValeCommand}" CommandParameter="{Binding ValeSeleccionado}"/>
+                      </StackPanel>
                     </Grid>
                   </Border>
-
-                  <!-- Tabla de Medicamentos del Vale -->
-                  <DataGrid ItemsSource="{Binding ValeSeleccionado.Medicamentos}"
-                            AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="False"
-                            HeadersVisibility="Column" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="{StaticResource Sand100Brush}"
-                            Background="White" RowBackground="White" RowHeight="48" BorderThickness="1" BorderBrush="{StaticResource Sand100Brush}"
-                            MaxHeight="320">
-                    <DataGrid.Columns>
-                      <DataGridTemplateColumn Header="ENTREGAR" Width="85">
-                        <DataGridTemplateColumn.CellTemplate>
-                          <DataTemplate>
-                            <CheckBox IsChecked="{Binding SeleccionadoParaEntrega, UpdateSourceTrigger=PropertyChanged}"
-                                      IsEnabled="{Binding PuedeSurtir}"
-                                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                          </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                      </DataGridTemplateColumn>
-
-                      <DataGridTextColumn Header="CÓDIGO DE BARRAS" Binding="{Binding CodigoBarras}" Width="140" IsReadOnly="True"/>
-
-                      <DataGridTemplateColumn Header="DESCRIPCIÓN DEL FÁRMACO" Width="*" IsReadOnly="True">
-                        <DataGridTemplateColumn.CellTemplate>
-                          <DataTemplate>
-                            <TextBlock Text="{Binding Descripcion}" FontWeight="Bold" FontSize="12" Foreground="{StaticResource InkBrush}"
-                                       VerticalAlignment="Center" TextTrimming="CharacterEllipsis" ToolTip="{Binding Descripcion}"/>
-                          </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                      </DataGridTemplateColumn>
-
-                      <DataGridTextColumn Header="AUTORIZADA" Binding="{Binding CantidadAutorizada}" Width="95" FontWeight="Bold" IsReadOnly="True"/>
-                      <DataGridTextColumn Header="SURTIDA" Binding="{Binding CantidadSurtida}" Width="85" IsReadOnly="True"/>
-                      <DataGridTemplateColumn Header="RESTANTE" Width="95" IsReadOnly="True">
-                        <DataGridTemplateColumn.CellTemplate>
-                          <DataTemplate>
-                            <Border Background="{StaticResource Rose100Brush}" CornerRadius="4" Padding="6,2" HorizontalAlignment="Center">
-                              <TextBlock Text="{Binding CantidadRestante}" FontWeight="Bold" FontSize="11" Foreground="{StaticResource Wine900Brush}"/>
-                            </Border>
-                          </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                      </DataGridTemplateColumn>
-
-                      <DataGridTemplateColumn Header="A ENTREGAR" Width="95">
-                        <DataGridTemplateColumn.CellTemplate>
-                          <DataTemplate>
-                            <TextBox Text="{Binding CantidadAEntregar, UpdateSourceTrigger=PropertyChanged}"
-                                     FontWeight="Bold" FontSize="11" TextAlignment="Center" Padding="4,2"
-                                     IsEnabled="{Binding PuedeSurtir}" BorderBrush="{StaticResource Sand100Brush}"/>
-                          </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                      </DataGridTemplateColumn>
-
-                      <DataGridTemplateColumn Header="ESTATUS" Width="110" IsReadOnly="True">
-                        <DataGridTemplateColumn.CellTemplate>
-                          <DataTemplate>
-                            <Border Background="{Binding EstatusBadgeColor}" CornerRadius="4" Padding="8,3" HorizontalAlignment="Center">
-                              <TextBlock Text="{Binding Estatus}" FontWeight="Bold" FontSize="10" Foreground="White"/>
-                            </Border>
-                          </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                      </DataGridTemplateColumn>
-
-                      <DataGridTemplateColumn Header="ACCIÓN INDIVIDUAL" Width="170" IsReadOnly="True">
-                        <DataGridTemplateColumn.CellTemplate>
-                          <DataTemplate>
-                            <Button Content="⚡ Surtir solo este" Style="{StaticResource SoftButton}" FontSize="10.5" Padding="8,4"
-                                    IsEnabled="{Binding PuedeSurtir}"
-                                    Command="{Binding DataContext.SurtirPartidaIndividualCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                    CommandParameter="{Binding}" HorizontalAlignment="Center"/>
-                          </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                      </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                  </DataGrid>
-                </StackPanel>
+                </Grid>
               </Border>
 
-              <!-- Tabla de Vales Registrados en IUBIDB_FARMACIAS -->
+              <!-- Tabla de Vales Registrados -->
               <Border Style="{StaticResource Card}" Margin="0,0,0,25">
                 <StackPanel>
-                  <DockPanel Margin="0,0,0,10">
-                    <TextBlock Text="Padrón General de Vales Subrogados Emitidos (Frm_Vales)" Style="{StaticResource CardTitle}" Margin="0"/>
-                    <TextBlock Text="Haga doble clic o seleccione un vale de la lista para cargarlo en el panel de surtido" FontSize="11" Foreground="#718096" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                  </DockPanel>
-
+                  <TextBlock Text="Padrón General de Vales Subrogados Emitidos" Style="{StaticResource CardTitle}"/>
                   <DataGrid ItemsSource="{Binding ValesList}" SelectedItem="{Binding ValeSeleccionado}"
                             AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True"
                             HeadersVisibility="Column" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="{StaticResource Sand100Brush}"
                             Background="White" RowBackground="White" RowHeight="46" BorderThickness="0"
-                            MaxHeight="500" EnableRowVirtualization="True"
+                            MaxHeight="540" EnableRowVirtualization="True"
                             VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling"
                             VirtualizingPanel.ScrollUnit="Pixel" ScrollViewer.CanContentScroll="True">
                     <DataGrid.Columns>
@@ -1232,13 +920,10 @@
                           </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                       </DataGridTemplateColumn>
-                      <DataGridTemplateColumn Header="MEDICAMENTO(S)" Width="2*">
+                      <DataGridTemplateColumn Header="MEDICAMENTO" Width="2*">
                         <DataGridTemplateColumn.CellTemplate>
                           <DataTemplate>
-                            <StackPanel VerticalAlignment="Center">
-                              <TextBlock Text="{Binding ResumenMedicamentos}" FontWeight="SemiBold" FontSize="11.5" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" ToolTip="{Binding ResumenMedicamentos}"/>
-                              <TextBlock Text="{Binding TotalMedicamentos, StringFormat='{}{0} fármaco(s) en vale'}" FontSize="9.5" Foreground="#718096"/>
-                            </StackPanel>
+                            <TextBlock Text="{Binding Medicamento}" FontWeight="SemiBold" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" ToolTip="{Binding Medicamento}"/>
                           </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                       </DataGridTemplateColumn>
@@ -1263,8 +948,8 @@
                       <DataGridTemplateColumn Header="ESTATUS" Width="100">
                         <DataGridTemplateColumn.CellTemplate>
                           <DataTemplate>
-                            <Border Background="{Binding EstatusBadgeColor}" CornerRadius="4" Padding="6,2" HorizontalAlignment="Center">
-                              <TextBlock Text="{Binding Estatus}" FontWeight="Bold" FontSize="10" Foreground="White"/>
+                            <Border Background="{StaticResource Sand50Brush}" CornerRadius="4" Padding="6,2" HorizontalAlignment="Center">
+                              <TextBlock Text="{Binding Estatus}" FontWeight="Bold" FontSize="10" Foreground="{StaticResource Wine900Brush}"/>
                             </Border>
                           </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -1521,301 +1206,83 @@
           </Border>
 
           <!-- ======================================================== -->
-          <!-- 5. VISTA: COMPRAS Y ENTRADAS POR FACTURA (MedicineEntryWindow - Captura 101039) -->
+          <!-- 5. VISTA: COMPRAS Y ENTRADAS POR FACTURA (Frm_Compras) -->
           <!-- ======================================================== -->
           <Border Style="{StaticResource ComprasViewStyle}">
             <StackPanel>
               <!-- Cabecera -->
               <DockPanel Margin="0,0,0,16">
-                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
-                  <Button Content="+ Ingresar Factura" Style="{StaticResource PrimaryButton}" Command="{Binding GuardarFacturaCommand}" Margin="0,0,8,0"/>
-                  <Button Content="Limpiar Formulario" Style="{StaticResource OutlineButton}" Command="{Binding LimpiarArticuloFacturaCommand}"/>
-                </StackPanel>
                 <StackPanel>
-                  <TextBlock Text="Entrada de Medicamento — Nueva Factura" FontFamily="Georgia" FontSize="22" FontWeight="Bold" Foreground="{StaticResource Wine950Brush}"/>
-                  <TextBlock Text="Recepción de proveedores, desglose de partidas con lote, caducidad e ingreso a inventario institucional." Opacity="0.65" FontSize="12" Margin="0,2,0,0"/>
+                  <TextBlock Text="Entradas de Medicamentos por Factura" FontFamily="Georgia" FontSize="22" FontWeight="Bold" Foreground="{StaticResource Wine950Brush}"/>
+                  <TextBlock Text="Recepción de proveedores mayoristas e ingreso de nuevos lotes a almacén central." Opacity="0.65" FontSize="12" Margin="0,2,0,0"/>
                 </StackPanel>
               </DockPanel>
 
-              <!-- 1. ENCABEZADO DE FACTURA (Exacto a MedicineEntryWindow Captura 101039) -->
+              <!-- Formulario de Captura Rápida de Factura -->
               <Border Style="{StaticResource Card}" Margin="0,0,0,16">
                 <StackPanel>
-                  <DockPanel Margin="0,0,0,12">
-                    <Border Background="{StaticResource Rose100Brush}" CornerRadius="4" Padding="8,3" HorizontalAlignment="Right">
-                      <TextBlock Text="RECEPCIÓN DE PROVEEDORES" FontSize="9.5" FontWeight="Bold" Foreground="{StaticResource Wine900Brush}"/>
-                    </Border>
-                    <TextBlock Text="📋 Encabezado de Factura" Style="{StaticResource CardTitle}" Margin="0"/>
-                  </DockPanel>
-
-                  <Grid>
-                    <Grid.RowDefinitions>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="12"/>
-                      <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+                  <TextBlock Text="Registrar Recepción de Nueva Factura de Compra" Style="{StaticResource CardTitle}"/>
+                  <Grid Margin="0,8,0,0">
                     <Grid.ColumnDefinitions>
-                      <ColumnDefinition Width="2.5*"/>
-                      <ColumnDefinition Width="14"/>
-                      <ColumnDefinition Width="*"/>
-                      <ColumnDefinition Width="14"/>
-                      <ColumnDefinition Width="1.2*"/>
-                      <ColumnDefinition Width="14"/>
-                      <ColumnDefinition Width="1.2*"/>
-                      <ColumnDefinition Width="14"/>
-                      <ColumnDefinition Width="1.2*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <!-- Proveedor ComboBox -->
-                    <StackPanel Grid.Row="0" Grid.Column="0">
-                      <TextBlock Text="PROVEEDOR *" Style="{StaticResource Caption}"/>
-                      <ComboBox ItemsSource="{Binding ProveedoresList}" SelectedItem="{Binding FacturaProveedorSeleccionado}"
-                                DisplayMemberPath="DisplayText" Height="32" FontSize="12" Margin="0,4,0,0"/>
-                    </StackPanel>
-
-                    <!-- ID Proveedor -->
-                    <StackPanel Grid.Row="0" Grid.Column="2">
-                      <TextBlock Text="ID PROVEEDOR" Style="{StaticResource Caption}"/>
-                      <TextBox Text="{Binding FacturaProveedorId, Mode=OneWay}" IsReadOnly="True" Background="{StaticResource Sand50Brush}" Height="32" Padding="8,6" Margin="0,4,0,0" FontWeight="Bold"/>
-                    </StackPanel>
-
-                    <!-- Número de Factura -->
-                    <StackPanel Grid.Row="0" Grid.Column="4">
-                      <TextBlock Text="NÚMERO DE FACTURA *" Style="{StaticResource Caption}"/>
-                      <TextBox Text="{Binding FacturaNumero, UpdateSourceTrigger=PropertyChanged}" Height="32" Padding="8,6" Margin="0,4,0,0" FontWeight="Bold"/>
-                    </StackPanel>
-
-                    <!-- Fecha de Factura -->
-                    <StackPanel Grid.Row="0" Grid.Column="6">
-                      <TextBlock Text="FECHA DE FACTURA" Style="{StaticResource Caption}"/>
-                      <DatePicker SelectedDate="{Binding FacturaFecha, UpdateSourceTrigger=PropertyChanged}" Height="32" Margin="0,4,0,0"/>
-                    </StackPanel>
-
-                    <!-- Fecha de Vencimiento -->
-                    <StackPanel Grid.Row="0" Grid.Column="8">
-                      <TextBlock Text="FECHA VENCIMIENTO" Style="{StaticResource Caption}"/>
-                      <DatePicker SelectedDate="{Binding FacturaFechaVencimiento, UpdateSourceTrigger=PropertyChanged}" Height="32" Margin="0,4,0,0"/>
-                    </StackPanel>
-
-                    <!-- Fila 2: Estatus de Factura -->
-                    <StackPanel Grid.Row="2" Grid.Column="0">
-                      <TextBlock Text="ESTATUS DE FACTURA" Style="{StaticResource Caption}"/>
-                      <ComboBox SelectedValue="{Binding FacturaEstatus}" SelectedValuePath="Content" Height="30" FontSize="11" Margin="0,4,0,0">
-                        <ComboBoxItem Content="PENDIENTE DE PAGO" IsSelected="True"/>
-                        <ComboBoxItem Content="PAGADA"/>
-                        <ComboBoxItem Content="EN PROCESO"/>
-                        <ComboBoxItem Content="REGISTRADA"/>
-                      </ComboBox>
-                    </StackPanel>
-
-                    <!-- Observaciones de la Factura -->
-                    <StackPanel Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="7">
-                      <TextBlock Text="OBSERVACIONES / NOTAS INSTITUCIONALES" Style="{StaticResource Caption}"/>
-                      <TextBox Text="{Binding NuevoProveedor, UpdateSourceTrigger=PropertyChanged}" Height="30" Padding="8,5" Margin="0,4,0,0" TextWrapping="NoWrap"/>
-                    </StackPanel>
-                  </Grid>
-                </StackPanel>
-              </Border>
-
-              <!-- 2. ALTA DE ARTÍCULOS CON LOTE Y CADUCIDAD (Exacto a MedicineEntryWindow Captura 101039 & 100848) -->
-              <Border Style="{StaticResource Card}" Margin="0,0,0,16">
-                <StackPanel>
-                  <DockPanel Margin="0,0,0,12">
-                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-                      <Button Content="Limpiar Fármaco" Style="{StaticResource OutlineButton}" Padding="10,5" Command="{Binding LimpiarArticuloFacturaCommand}" Margin="0,0,8,0"/>
-                      <Button Content="+ Agregar Artículo a Factura" Style="{StaticResource PrimaryButton}" Padding="14,5" Command="{Binding AgregarArticuloAFacturaCommand}"/>
-                    </StackPanel>
-                    <TextBlock Text="💊 Alta de Artículos a la Factura (con Lote y Caducidad)" Style="{StaticResource CardTitle}" Margin="0"/>
-                  </DockPanel>
-
-                  <!-- Renglón 1: Identificación del Medicamento -->
-                  <Grid Margin="0,0,0,10">
-                    <Grid.ColumnDefinitions>
-                      <ColumnDefinition Width="180"/>
-                      <ColumnDefinition Width="12"/>
                       <ColumnDefinition Width="130"/>
                       <ColumnDefinition Width="12"/>
-                      <ColumnDefinition Width="90"/>
-                      <ColumnDefinition Width="12"/>
                       <ColumnDefinition Width="*"/>
+                      <ColumnDefinition Width="12"/>
+                      <ColumnDefinition Width="1.5*"/>
+                      <ColumnDefinition Width="12"/>
+                      <ColumnDefinition Width="100"/>
+                      <ColumnDefinition Width="12"/>
+                      <ColumnDefinition Width="80"/>
+                      <ColumnDefinition Width="12"/>
+                      <ColumnDefinition Width="80"/>
+                      <ColumnDefinition Width="12"/>
+                      <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
-
+                    
                     <StackPanel Grid.Column="0">
-                      <TextBlock Text="CÓDIGO DE BARRAS" Style="{StaticResource Caption}"/>
-                      <TextBox Text="{Binding ArtCodigoBarras, UpdateSourceTrigger=PropertyChanged}" Height="30" Padding="6,4" Margin="0,3,0,0"/>
+                      <TextBlock Text="FOLIO FACTURA" Style="{StaticResource Caption}"/>
+                      <TextBox Text="{Binding NuevaFacturaFolio, UpdateSourceTrigger=PropertyChanged}" Padding="8,5" Margin="0,4,0,0"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="2">
-                      <TextBlock Text="CLAVE CUADRO BÁSICO" Style="{StaticResource Caption}"/>
-                      <TextBox Text="{Binding ArtClave, UpdateSourceTrigger=PropertyChanged}" Height="30" Padding="6,4" Margin="0,3,0,0"/>
+                      <TextBlock Text="PROVEEDOR" Style="{StaticResource Caption}"/>
+                      <TextBox Text="{Binding NuevoProveedor, UpdateSourceTrigger=PropertyChanged}" Padding="8,5" Margin="0,4,0,0"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="4">
-                      <TextBlock Text="ID MEDICAMENTO" Style="{StaticResource Caption}"/>
-                      <TextBox Text="{Binding ArtIdMedicamento, UpdateSourceTrigger=PropertyChanged}" Height="30" Padding="6,4" Margin="0,3,0,0" IsReadOnly="True" Background="{StaticResource Sand50Brush}"/>
+                      <TextBlock Text="FÁRMACO A INGRESAR" Style="{StaticResource Caption}"/>
+                      <TextBox Text="{Binding NuevoMedicamento, UpdateSourceTrigger=PropertyChanged}" Padding="8,5" Margin="0,4,0,0"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="6">
-                      <TextBlock Text="DESCRIPCIÓN DEL FÁRMACO &amp; PRESENTACIÓN *" Style="{StaticResource Caption}"/>
-                      <TextBox Text="{Binding ArtDescripcion, UpdateSourceTrigger=PropertyChanged}" Height="30" Padding="8,4" Margin="0,3,0,0" FontWeight="SemiBold"/>
-                    </StackPanel>
-                  </Grid>
-
-                  <!-- Renglón 2: LOTE, Caducidad, Cantidad, Precios e IVA (Corregido: ¡Lote visible y editable!) -->
-                  <Grid>
-                    <Grid.ColumnDefinitions>
-                      <ColumnDefinition Width="130"/>
-                      <ColumnDefinition Width="12"/>
-                      <ColumnDefinition Width="130"/>
-                      <ColumnDefinition Width="12"/>
-                      <ColumnDefinition Width="90"/>
-                      <ColumnDefinition Width="12"/>
-                      <ColumnDefinition Width="120"/>
-                      <ColumnDefinition Width="12"/>
-                      <ColumnDefinition Width="90"/>
-                      <ColumnDefinition Width="12"/>
-                      <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <!-- LOTE (Prominente: Captura 100848 y 101039) -->
-                    <StackPanel Grid.Column="0">
-                      <TextBlock Text="LOTE PROVEEDOR *" FontWeight="Bold" Foreground="{StaticResource Wine900Brush}" Style="{StaticResource Caption}"/>
-                      <TextBox Text="{Binding ArtLote, UpdateSourceTrigger=PropertyChanged}" Height="30" Padding="6,4" Margin="0,3,0,0" FontWeight="Bold"/>
+                      <TextBlock Text="LOTE" Style="{StaticResource Caption}"/>
+                      <TextBox Text="{Binding NuevoLote, UpdateSourceTrigger=PropertyChanged}" Padding="8,5" Margin="0,4,0,0"/>
                     </StackPanel>
 
-                    <!-- Fecha de Caducidad -->
-                    <StackPanel Grid.Column="2">
-                      <TextBlock Text="FECHA CADUCIDAD *" Style="{StaticResource Caption}"/>
-                      <DatePicker SelectedDate="{Binding ArtFechaCaducidad, UpdateSourceTrigger=PropertyChanged}" Height="30" Margin="0,3,0,0"/>
-                    </StackPanel>
-
-                    <!-- Cantidad de Piezas -->
-                    <StackPanel Grid.Column="4">
-                      <TextBlock Text="CANTIDAD *" Style="{StaticResource Caption}"/>
-                      <TextBox Text="{Binding ArtCantidad, UpdateSourceTrigger=PropertyChanged}" Height="30" Padding="6,4" Margin="0,3,0,0" FontWeight="Bold" TextAlignment="Center"/>
-                    </StackPanel>
-
-                    <!-- Precio Farmacia / Costo Unitario -->
-                    <StackPanel Grid.Column="6">
-                      <TextBlock Text="PRECIO FARMACIA *" Style="{StaticResource Caption}"/>
-                      <TextBox Text="{Binding ArtPrecio, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" Height="30" Padding="6,4" Margin="0,3,0,0"/>
-                    </StackPanel>
-
-                    <!-- IVA -->
                     <StackPanel Grid.Column="8">
-                      <TextBlock Text="IVA" Style="{StaticResource Caption}"/>
-                      <TextBox Text="{Binding ArtIva, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" Height="30" Padding="6,4" Margin="0,3,0,0"/>
+                      <TextBlock Text="CANTIDAD" Style="{StaticResource Caption}"/>
+                      <TextBox Text="{Binding NuevaCantidad, UpdateSourceTrigger=PropertyChanged}" Padding="8,5" Margin="0,4,0,0"/>
                     </StackPanel>
 
-                    <!-- Tipo de Compra -->
                     <StackPanel Grid.Column="10">
-                      <TextBlock Text="TIPO DE COMPRA" Style="{StaticResource Caption}"/>
-                      <ComboBox SelectedValue="{Binding ArtTipoCompra}" SelectedValuePath="Content" Height="30" FontSize="11" Margin="0,3,0,0">
-                        <ComboBoxItem Content="COMPRA DIRECTA" IsSelected="True"/>
-                        <ComboBoxItem Content="LICITACIÓN PÚBLICA"/>
-                        <ComboBoxItem Content="INVITACIÓN RESTRINGIDA"/>
-                        <ComboBoxItem Content="DONACIÓN"/>
-                      </ComboBox>
+                      <TextBlock Text="COSTO U." Style="{StaticResource Caption}"/>
+                      <TextBox Text="{Binding NuevoCosto, UpdateSourceTrigger=PropertyChanged}" Padding="8,5" Margin="0,4,0,0"/>
                     </StackPanel>
+
+                    <Button Grid.Column="12" Content="+ Ingresar Factura" Style="{StaticResource PrimaryButton}" VerticalAlignment="Bottom"
+                            Command="{Binding AgregarNuevaFacturaCommand}"/>
                   </Grid>
                 </StackPanel>
               </Border>
 
-              <!-- 3. DETALLE DE LA FACTURA (Exacto a MedicineEntryWindow Captura 101039) -->
-              <Border Style="{StaticResource Card}" Margin="0,0,0,16">
-                <StackPanel>
-                  <DockPanel Margin="0,0,0,10">
-                    <TextBlock Text="{Binding FacturaPartidasList.Count, StringFormat='Partidas capturadas: {0}'}" FontSize="11" Foreground="#718096" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBlock Text="📦 Detalle de la Factura (Partidas a Ingresar)" Style="{StaticResource CardTitle}" Margin="0"/>
-                  </DockPanel>
-
-                  <DataGrid ItemsSource="{Binding FacturaPartidasList}" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True"
-                            HeadersVisibility="Column" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="{StaticResource Sand100Brush}"
-                            Background="White" RowBackground="White" RowHeight="42" BorderThickness="0" MaxHeight="300"
-                            ScrollViewer.VerticalScrollBarVisibility="Auto">
-                    <DataGrid.Columns>
-                      <DataGridTextColumn Header="CÓDIGO DE BARRAS" Binding="{Binding CodigoBarras}" Width="130"/>
-                      <DataGridTemplateColumn Header="DESCRIPCIÓN DEL FÁRMACO" Width="2.5*">
-                        <DataGridTemplateColumn.CellTemplate>
-                          <DataTemplate>
-                            <TextBlock Text="{Binding Descripcion}" FontWeight="SemiBold" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" ToolTip="{Binding Descripcion}"/>
-                          </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                      </DataGridTemplateColumn>
-                      <DataGridTextColumn Header="CANTIDAD" Binding="{Binding Cantidad}" Width="85" FontWeight="Bold"/>
-                      <DataGridTextColumn Header="LOTE" Binding="{Binding Lote}" Width="110" FontWeight="Bold"/>
-                      <DataGridTextColumn Header="CADUCIDAD" Binding="{Binding FechaCaducidad}" Width="105"/>
-                      <DataGridTextColumn Header="PRECIO UNIT." Binding="{Binding Precio, StringFormat=C}" Width="105"/>
-                      <DataGridTextColumn Header="IVA" Binding="{Binding IVA, StringFormat=C}" Width="85"/>
-                      <DataGridTextColumn Header="SUBTOTAL" Binding="{Binding Subtotal, StringFormat=C}" Width="110" FontWeight="Bold"/>
-                      <DataGridTextColumn Header="TIPO COMPRA" Binding="{Binding TipoCompra}" Width="120"/>
-                      <DataGridTemplateColumn Header="ACCIÓN" Width="70">
-                        <DataGridTemplateColumn.CellTemplate>
-                          <DataTemplate>
-                            <Button Content="🗑️" ToolTip="Quitar partida" Background="Transparent" BorderThickness="0" Cursor="Hand"
-                                    Command="{Binding DataContext.EliminarArticuloFacturaCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                    CommandParameter="{Binding}"/>
-                          </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                      </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                  </DataGrid>
-                </StackPanel>
-              </Border>
-
-              <!-- 4. TOTALES DE FACTURA & BOTÓN GUARDAR (Exacto a MedicineEntryWindow Captura 101039) -->
-              <Border Style="{StaticResource Card}" Margin="0,0,0,16" Padding="16">
-                <Grid>
-                  <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                  </Grid.ColumnDefinitions>
-
-                  <!-- # de Artículos -->
-                  <StackPanel Grid.Column="0">
-                    <TextBlock Text="# DE ARTÍCULOS" Style="{StaticResource Caption}"/>
-                    <TextBlock Text="{Binding FacturaTotalArticulos}" FontSize="22" FontWeight="Bold" Foreground="{StaticResource Wine950Brush}" Margin="0,2,0,0"/>
-                  </StackPanel>
-
-                  <!-- Subtotal -->
-                  <StackPanel Grid.Column="1">
-                    <TextBlock Text="SUBTOTAL" Style="{StaticResource Caption}"/>
-                    <TextBlock Text="{Binding FacturaSubtotal, StringFormat=C}" FontSize="22" FontWeight="Bold" Foreground="{StaticResource Wine900Brush}" Margin="0,2,0,0"/>
-                  </StackPanel>
-
-                  <!-- IVA -->
-                  <StackPanel Grid.Column="2">
-                    <TextBlock Text="IVA" Style="{StaticResource Caption}"/>
-                    <TextBlock Text="{Binding FacturaIvaTotal, StringFormat=C}" FontSize="22" FontWeight="Bold" Foreground="{StaticResource Wine800Brush}" Margin="0,2,0,0"/>
-                  </StackPanel>
-
-                  <!-- Total General -->
-                  <StackPanel Grid.Column="3">
-                    <TextBlock Text="GRAN TOTAL FACTURA" Style="{StaticResource Caption}"/>
-                    <TextBlock Text="{Binding FacturaGranTotal, StringFormat=C}" FontSize="24" FontWeight="Bold" Foreground="{StaticResource Wine900Brush}" Margin="0,2,0,0"/>
-                  </StackPanel>
-
-                  <!-- Botón Guardar Factura -->
-                  <Button Grid.Column="4" Content="💾 Guardar Factura Completa" Style="{StaticResource PrimaryButton}" 
-                          VerticalAlignment="Center" Padding="20,12" FontSize="13"
-                          Command="{Binding GuardarFacturaCommand}"/>
-                </Grid>
-              </Border>
-
-              <!-- 5. HISTORIAL DE FACTURAS REGISTRADAS EN IUBIDB_FARMACIAS -->
+              <!-- Tabla de Facturas Recibidas -->
               <Border Style="{StaticResource Card}" Margin="0,0,0,25">
                 <StackPanel>
-                  <DockPanel Margin="0,0,0,10">
-                    <TextBlock Text="Historial de Facturas Registradas en IUBIDB_FARMACIAS" Style="{StaticResource CardTitle}" Margin="0"/>
-                    <TextBlock Text="{Binding ComprasList.Count, StringFormat='Total facturas: {0}'}" FontSize="11" Foreground="#718096" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                  </DockPanel>
-
+                  <TextBlock Text="Historial de Facturas de Compra Registradas" Style="{StaticResource CardTitle}"/>
                   <DataGrid ItemsSource="{Binding ComprasList}" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True"
                             HeadersVisibility="Column" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="{StaticResource Sand100Brush}"
-                            Background="White" RowBackground="White" RowHeight="44" BorderThickness="0"
-                            MaxHeight="450" EnableRowVirtualization="True"
+                            Background="White" RowBackground="White" RowHeight="46" BorderThickness="0"
+                            MaxHeight="540" EnableRowVirtualization="True"
                             VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling"
                             VirtualizingPanel.ScrollUnit="Pixel" ScrollViewer.CanContentScroll="True">
                     <DataGrid.Columns>
@@ -1828,9 +1295,9 @@
                         </DataGridTemplateColumn.CellTemplate>
                       </DataGridTemplateColumn>
                       <DataGridTextColumn Header="FECHA RECEPCIÓN" Binding="{Binding FechaRecepcion}" Width="120"/>
-                      <DataGridTextColumn Header="PIEZAS TOTALES" Binding="{Binding PiezasTotales}" Width="110"/>
+                      <DataGridTextColumn Header="PIEZAS TOTALES" Binding="{Binding PiezasTotales}" Width="120"/>
                       <DataGridTextColumn Header="TOTAL" Binding="{Binding Total, StringFormat=C}" Width="130" FontWeight="Bold"/>
-                      <DataGridTemplateColumn Header="ESTATUS" Width="140">
+                      <DataGridTemplateColumn Header="ESTATUS" Width="150">
                         <DataGridTemplateColumn.CellTemplate>
                           <DataTemplate>
                             <Border Background="{StaticResource Rose100Brush}" CornerRadius="4" Padding="6,2" HorizontalAlignment="Left">
@@ -2039,7 +1506,7 @@
                   <StackPanel Grid.Column="6">
                     <TextBlock Text="TERMINAL / CAJA" Style="{StaticResource Caption}"/>
                     <ComboBox SelectedIndex="0" Margin="0,4,0,0" Padding="8,5">
-                      <ComboBoxItem Content="Ventanilla Central"/>
+                      <ComboBoxItem Content="Caja 02 (Ventanilla Central)"/>
                       <ComboBoxItem Content="Caja 01 (Urgencias)"/>
                       <ComboBoxItem Content="Todas las Cajas"/>
                     </ComboBox>
@@ -2158,834 +1625,6 @@
               </Border>
             </StackPanel>
           </Border>
-
-          <!-- ======================================================== -->
-          <!-- 8. VISTA: REIMPRESIÓN DE DOCUMENTOS (ReprintDocumentWindow - Captura 101158) -->
-          <!-- ======================================================== -->
-          <Border Style="{StaticResource ReimpresionViewStyle}">
-            <StackPanel>
-              <!-- Cabecera -->
-              <DockPanel Margin="0,0,0,16">
-                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
-                  <Button Content="🖨️ Reimprimir Documento" Style="{StaticResource PrimaryButton}" 
-                          Command="{Binding EjecutarReimpresionCommand}" CommandParameter="{Binding DocReimpresionSeleccionado}"/>
-                </StackPanel>
-                <StackPanel>
-                  <TextBlock Text="Reimpresión de Documentos Oficiales" FontFamily="Georgia" FontSize="22" FontWeight="Bold" Foreground="{StaticResource Wine950Brush}"/>
-                  <TextBlock Text="Búsqueda histórica y reemisión autorizada de tickets de dispensación y comprobantes de receta." Opacity="0.65" FontSize="12" Margin="0,2,0,0"/>
-                </StackPanel>
-              </DockPanel>
-
-              <!-- Barra de Filtros (Exacto a ReprintDocumentWindow Captura 101158) -->
-              <Border Style="{StaticResource Card}" Margin="0,0,0,16" Padding="14">
-                <Grid>
-                  <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="180"/>
-                    <ColumnDefinition Width="14"/>
-                    <ColumnDefinition Width="180"/>
-                    <ColumnDefinition Width="14"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                  </Grid.ColumnDefinitions>
-
-                  <StackPanel Grid.Column="0">
-                    <TextBlock Text="FECHA DESDE:" Style="{StaticResource Caption}"/>
-                    <DatePicker SelectedDate="{Binding ReimpFechaDesde, UpdateSourceTrigger=PropertyChanged}" Height="32" Margin="0,4,0,0"/>
-                  </StackPanel>
-
-                  <StackPanel Grid.Column="2">
-                    <TextBlock Text="FECHA HASTA:" Style="{StaticResource Caption}"/>
-                    <DatePicker SelectedDate="{Binding ReimpFechaHasta, UpdateSourceTrigger=PropertyChanged}" Height="32" Margin="0,4,0,0"/>
-                  </StackPanel>
-
-                  <Button Grid.Column="4" Content="🔍 BUSCAR" Style="{StaticResource PrimaryButton}" VerticalAlignment="Bottom" Height="32" Padding="18,0"
-                          Command="{Binding BuscarDocumentosReimpresionCommand}"/>
-
-                  <TextBlock Grid.Column="5" Text="{Binding DocumentosReimpresionList.Count, StringFormat='Comprobantes localizados: {0}'}" 
-                             FontSize="11" Foreground="#718096" VerticalAlignment="Bottom" Margin="16,0,0,8"/>
-
-                  <Button Grid.Column="6" Content="🖨️ Reimprimir Seleccionado" Style="{StaticResource OutlineButton}" VerticalAlignment="Bottom" Height="32" Padding="14,0"
-                          Command="{Binding EjecutarReimpresionCommand}" CommandParameter="{Binding DocReimpresionSeleccionado}"/>
-                </Grid>
-              </Border>
-
-              <!-- Tabla de Documentos Reimprimibles (Exacto a GdrDocumentos) -->
-              <Border Style="{StaticResource Card}" Margin="0,0,0,25">
-                <DataGrid ItemsSource="{Binding DocumentosReimpresionList}" SelectedItem="{Binding DocReimpresionSeleccionado}"
-                          AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True"
-                          HeadersVisibility="Column" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="{StaticResource Sand100Brush}"
-                          Background="White" RowBackground="White" RowHeight="46" BorderThickness="0"
-                          MaxHeight="540" EnableRowVirtualization="True"
-                          VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling"
-                          VirtualizingPanel.ScrollUnit="Pixel" ScrollViewer.CanContentScroll="True">
-                  <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID / FOLIO" Binding="{Binding ID}" Width="120" FontWeight="Bold"/>
-                    <DataGridTextColumn Header="NÚMERO DE RECETA" Binding="{Binding NumeroReceta}" Width="160" FontWeight="SemiBold"/>
-                    <DataGridTextColumn Header="FECHA RECETA" Binding="{Binding FechaReceta}" Width="140"/>
-                    <DataGridTemplateColumn Header="TIPO DOCUMENTO" Width="180">
-                      <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                          <Border Background="{StaticResource Rose100Brush}" CornerRadius="4" Padding="8,3" HorizontalAlignment="Left">
-                            <TextBlock Text="{Binding TipoDocumento}" FontWeight="Bold" FontSize="10.5" Foreground="{StaticResource Wine900Brush}"/>
-                          </Border>
-                        </DataTemplate>
-                      </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="DERECHOHABIENTE / PACIENTE" Width="2*">
-                      <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                          <TextBlock Text="{Binding Paciente}" FontWeight="SemiBold" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" ToolTip="{Binding Paciente}"/>
-                        </DataTemplate>
-                      </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="ACCIÓN" Width="120">
-                      <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                          <Button Content="🖨️ Reimprimir" Style="{StaticResource OutlineButton}" Padding="8,4" FontSize="11"
-                                  Command="{Binding DataContext.EjecutarReimpresionCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                  CommandParameter="{Binding}"/>
-                        </DataTemplate>
-                      </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                  </DataGrid.Columns>
-                </DataGrid>
-              </Border>
-            </StackPanel>
-          </Border>
-
-          <!-- ======================================================== -->
-          <!-- 9. VISTA: INFORMACIÓN DE LA RECETA & DEVOLUCIONES (PrescriptionCancelWindow - Captura 101216) -->
-          <!-- ======================================================== -->
-          <Border Style="{StaticResource InfoRecetaViewStyle}">
-            <StackPanel>
-              <!-- Cabecera -->
-              <DockPanel Margin="0,0,0,16">
-                <StackPanel>
-                  <TextBlock Text="Información de la Receta y Devoluciones" FontFamily="Georgia" FontSize="22" FontWeight="Bold" Foreground="{StaticResource Wine950Brush}"/>
-                  <TextBlock Text="Consulta integral del surtimiento, partidas entregadas en ventanilla, vales generados y solicitud de devoluciones." Opacity="0.65" FontSize="12" Margin="0,2,0,0"/>
-                </StackPanel>
-              </DockPanel>
-
-              <!-- Panel Superior: Buscador y Ficha de la Receta (Exacto a PrescriptionCancelWindow Captura 101216) -->
-              <Border Style="{StaticResource Card}" Margin="0,0,0,16" Padding="16">
-                <Grid>
-                  <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="12"/>
-                    <RowDefinition Height="Auto"/>
-                  </Grid.RowDefinitions>
-                  <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="220"/>
-                    <ColumnDefinition Width="14"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="14"/>
-                    <ColumnDefinition Width="140"/>
-                    <ColumnDefinition Width="14"/>
-                    <ColumnDefinition Width="140"/>
-                    <ColumnDefinition Width="14"/>
-                    <ColumnDefinition Width="1.5*"/>
-                  </Grid.ColumnDefinitions>
-
-                  <!-- Búsqueda por Folio -->
-                  <StackPanel Grid.Row="0" Grid.Column="0">
-                    <TextBlock Text="NÚMERO DE RECETA (BUSCAR) *" Style="{StaticResource Caption}"/>
-                    <DockPanel Margin="0,4,0,0">
-                      <Button DockPanel.Dock="Right" Content="🔍" Style="{StaticResource PrimaryButton}" Padding="10,4" Margin="6,0,0,0"
-                              Command="{Binding BuscarInfoRecetaCommand}"/>
-                      <TextBox Text="{Binding InfoRecetaBusqueda, UpdateSourceTrigger=PropertyChanged}" Height="32" Padding="8,5" FontWeight="Bold" FontSize="13">
-                        <TextBox.InputBindings>
-                          <KeyBinding Key="Enter" Command="{Binding BuscarInfoRecetaCommand}"/>
-                        </TextBox.InputBindings>
-                      </TextBox>
-                    </DockPanel>
-                  </StackPanel>
-
-                  <!-- Derechohabiente Nombre -->
-                  <StackPanel Grid.Row="0" Grid.Column="2">
-                    <TextBlock Text="DERECHOHABIENTE" Style="{StaticResource Caption}"/>
-                    <TextBox Text="{Binding InfoRecetaDerechohabiente, Mode=OneWay}" IsReadOnly="True" Background="{StaticResource Sand50Brush}" Height="32" Padding="8,6" Margin="0,4,0,0" FontWeight="Bold"/>
-                  </StackPanel>
-
-                  <!-- ID / Carnet -->
-                  <StackPanel Grid.Row="0" Grid.Column="4">
-                    <TextBlock Text="ID / CARNET" Style="{StaticResource Caption}"/>
-                    <TextBox Text="{Binding InfoRecetaIdCarnet, Mode=OneWay}" IsReadOnly="True" Background="{StaticResource Sand50Brush}" Height="32" Padding="8,6" Margin="0,4,0,0" FontWeight="Bold"/>
-                  </StackPanel>
-
-                  <!-- Fecha -->
-                  <StackPanel Grid.Row="0" Grid.Column="6">
-                    <TextBlock Text="FECHA RECETA" Style="{StaticResource Caption}"/>
-                    <TextBox Text="{Binding InfoRecetaFecha, Mode=OneWay}" IsReadOnly="True" Background="{StaticResource Sand50Brush}" Height="32" Padding="8,6" Margin="0,4,0,0"/>
-                  </StackPanel>
-
-                  <!-- Médico -->
-                  <StackPanel Grid.Row="0" Grid.Column="8">
-                    <TextBlock Text="MÉDICO PRESCRIPTOR" Style="{StaticResource Caption}"/>
-                    <TextBox Text="{Binding InfoRecetaMedico, Mode=OneWay}" IsReadOnly="True" Background="{StaticResource Sand50Brush}" Height="32" Padding="8,6" Margin="0,4,0,0" FontWeight="SemiBold"/>
-                  </StackPanel>
-
-                  <!-- Fila Informativa de Ayuda -->
-                  <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="9" 
-                             Text="Ingrese el folio de receta (ej. C73342, C73344, VI78649) y presione Enter o Buscar para consultar su estado completo." 
-                             FontSize="11" Foreground="#718096" FontStyle="Italic"/>
-                </Grid>
-              </Border>
-
-              <!-- Sección 1: DETALLE DE RECETA (Exacto a GdrRecetaDetalle con botón Devolver) -->
-              <Border Style="{StaticResource Card}" Margin="0,0,0,16">
-                <StackPanel>
-                  <DockPanel Margin="0,0,0,10">
-                    <TextBlock Text="{Binding InfoRecetaDetalleList.Count, StringFormat='Partidas surtidas: {0}'}" FontSize="11" Foreground="#718096" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBlock Text="💊 DETALLE DE RECETA (DISPENSACIONES EN VENTANILLA)" Style="{StaticResource CardTitle}" Margin="0"/>
-                  </DockPanel>
-
-                  <DataGrid ItemsSource="{Binding InfoRecetaDetalleList}" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True"
-                            HeadersVisibility="Column" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="{StaticResource Sand100Brush}"
-                            Background="White" RowBackground="White" RowHeight="44" BorderThickness="0" MaxHeight="260"
-                            ScrollViewer.VerticalScrollBarVisibility="Auto">
-                    <DataGrid.Columns>
-                      <DataGridTextColumn Header="NÚMERO TICKET" Binding="{Binding Ticket_ID}" Width="130" FontWeight="Bold"/>
-                      <DataGridTextColumn Header="CANTIDAD" Binding="{Binding Cantidad}" Width="90" FontWeight="Bold"/>
-                      <DataGridTextColumn Header="CÓDIGO DE BARRAS" Binding="{Binding CodigoBarras}" Width="140"/>
-                      <DataGridTemplateColumn Header="DESCRIPCIÓN DEL MEDICAMENTO" Width="2.5*">
-                        <DataGridTemplateColumn.CellTemplate>
-                          <DataTemplate>
-                            <TextBlock Text="{Binding Descripcion}" FontWeight="SemiBold" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" ToolTip="{Binding Descripcion}"/>
-                          </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                      </DataGridTemplateColumn>
-                      <DataGridTemplateColumn Header="ESTATUS" Width="120">
-                        <DataGridTemplateColumn.CellTemplate>
-                          <DataTemplate>
-                            <Border Background="{StaticResource Rose100Brush}" CornerRadius="4" Padding="6,2" HorizontalAlignment="Left">
-                              <TextBlock Text="{Binding EstatusString}" FontWeight="Bold" FontSize="10" Foreground="{StaticResource Wine900Brush}"/>
-                            </Border>
-                          </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                      </DataGridTemplateColumn>
-                      <DataGridTemplateColumn Header="ACCIÓN" Width="110">
-                        <DataGridTemplateColumn.CellTemplate>
-                          <DataTemplate>
-                            <Button Content="↩ Devolver" Style="{StaticResource OutlineButton}" Padding="8,4" FontSize="11"
-                                    Command="{Binding DataContext.DevolverMedicamentoRecetaCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                    CommandParameter="{Binding}"/>
-                          </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                      </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                  </DataGrid>
-                </StackPanel>
-              </Border>
-
-              <!-- Sección 2: VALES GENERADOS POR LA RECETA (Exacto a GdrVales con botón Surtir Vale) -->
-              <Border Style="{StaticResource Card}" Margin="0,0,0,25">
-                <StackPanel>
-                  <DockPanel Margin="0,0,0,10">
-                    <TextBlock Text="{Binding InfoRecetaValesList.Count, StringFormat='Vales asociados: {0}'}" FontSize="11" Foreground="#718096" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBlock Text="🎫 VALES ASOCIADOS POR DESABASTO (SUBROGADOS)" Style="{StaticResource CardTitle}" Margin="0"/>
-                  </DockPanel>
-
-                  <DataGrid ItemsSource="{Binding InfoRecetaValesList}" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True"
-                            HeadersVisibility="Column" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="{StaticResource Sand100Brush}"
-                            Background="White" RowBackground="White" RowHeight="44" BorderThickness="0" MaxHeight="260"
-                            ScrollViewer.VerticalScrollBarVisibility="Auto">
-                    <DataGrid.Columns>
-                      <DataGridTextColumn Header="NO. DE VALE" Binding="{Binding ID_Vale}" Width="120" FontWeight="Bold"/>
-                      <DataGridTextColumn Header="CANTIDAD" Binding="{Binding Cantidad}" Width="85" FontWeight="Bold"/>
-                      <DataGridTextColumn Header="CÓDIGO DE BARRAS" Binding="{Binding CodigoBarras}" Width="140"/>
-                      <DataGridTemplateColumn Header="DESCRIPCIÓN DEL FÁRMACO" Width="2*">
-                        <DataGridTemplateColumn.CellTemplate>
-                          <DataTemplate>
-                            <TextBlock Text="{Binding Descripcion}" FontWeight="SemiBold" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" ToolTip="{Binding Descripcion}"/>
-                          </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                      </DataGridTemplateColumn>
-                      <DataGridTextColumn Header="SURTIR EN (DÍAS)" Binding="{Binding Dias_Surtir}" Width="115"/>
-                      <DataGridTextColumn Header="SURTIDOS" Binding="{Binding Surtido}" Width="90"/>
-                      <DataGridTextColumn Header="FALTANTES" Binding="{Binding Restan}" Width="90" FontWeight="Bold"/>
-                      <DataGridTemplateColumn Header="ACCIÓN" Width="120">
-                        <DataGridTemplateColumn.CellTemplate>
-                          <DataTemplate>
-                            <Button Content="✔ Surtir Vale" Style="{StaticResource PrimaryButton}" Padding="8,4" FontSize="11"
-                                    Command="{Binding DataContext.SurtirValeDesdeInfoRecetaCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                    CommandParameter="{Binding}"/>
-                          </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                      </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                  </DataGrid>
-                </StackPanel>
-              </Border>
-            </StackPanel>
-          </Border>
-
-          <!-- ======================================================== -->
-          <!-- 10. VISTA: REPORTE DE COMPRAS (BillsEntryReportWindow - Captura 101306) -->
-          <!-- ======================================================== -->
-          <Border Style="{StaticResource ReporteComprasViewStyle}">
-            <StackPanel>
-              <!-- Cabecera -->
-              <DockPanel Margin="0,0,0,16">
-                <Button DockPanel.Dock="Right" Content="📥 Exportar a Excel" Style="{StaticResource OutlineButton}"
-                        Command="{Binding ExportarReporteComprasExcelCommand}"/>
-                <StackPanel>
-                  <TextBlock Text="Reporte de Compras a Proveedores" FontFamily="Georgia" FontSize="22" FontWeight="Bold" Foreground="{StaticResource Wine950Brush}"/>
-                  <TextBlock Text="Informe consolidado y desglosado de facturas de adquisición, importes, IVA y tipo de compra." Opacity="0.65" FontSize="12" Margin="0,2,0,0"/>
-                </StackPanel>
-              </DockPanel>
-
-              <!-- Barra de Filtros (Exacto a BillsEntryReportWindow Captura 101306) -->
-              <Border Style="{StaticResource Card}" Margin="0,0,0,16" Padding="14">
-                <Grid>
-                  <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="10"/>
-                    <RowDefinition Height="Auto"/>
-                  </Grid.RowDefinitions>
-                  <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="12"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="12"/>
-                    <ColumnDefinition Width="1.2*"/>
-                    <ColumnDefinition Width="12"/>
-                    <ColumnDefinition Width="1.2*"/>
-                    <ColumnDefinition Width="12"/>
-                    <ColumnDefinition Width="110"/>
-                    <ColumnDefinition Width="12"/>
-                    <ColumnDefinition Width="Auto"/>
-                  </Grid.ColumnDefinitions>
-
-                  <!-- Proveedor -->
-                  <StackPanel Grid.Row="0" Grid.Column="0">
-                    <TextBlock Text="PROVEEDOR:" Style="{StaticResource Caption}"/>
-                    <TextBox Text="{Binding RepComprasProveedor, UpdateSourceTrigger=PropertyChanged}" Height="30" Padding="6,4" Margin="0,3,0,0"/>
-                  </StackPanel>
-
-                  <!-- Número de Factura -->
-                  <StackPanel Grid.Row="0" Grid.Column="2">
-                    <TextBlock Text="NÚMERO DE FACTURA:" Style="{StaticResource Caption}"/>
-                    <TextBox Text="{Binding RepComprasFactura, UpdateSourceTrigger=PropertyChanged}" Height="30" Padding="6,4" Margin="0,3,0,0"/>
-                  </StackPanel>
-
-                  <!-- Fecha Desde -->
-                  <StackPanel Grid.Row="0" Grid.Column="4">
-                    <TextBlock Text="FECHA DESDE:" Style="{StaticResource Caption}"/>
-                    <DatePicker SelectedDate="{Binding RepComprasFechaDesde, UpdateSourceTrigger=PropertyChanged}" Height="30" Margin="0,3,0,0"/>
-                  </StackPanel>
-
-                  <!-- Fecha Hasta -->
-                  <StackPanel Grid.Row="0" Grid.Column="6">
-                    <TextBlock Text="FECHA HASTA:" Style="{StaticResource Caption}"/>
-                    <DatePicker SelectedDate="{Binding RepComprasFechaHasta, UpdateSourceTrigger=PropertyChanged}" Height="30" Margin="0,3,0,0"/>
-                  </StackPanel>
-
-                  <!-- CheckBox Desglosado -->
-                  <StackPanel Grid.Row="0" Grid.Column="8" VerticalAlignment="Center" Margin="0,14,0,0">
-                    <CheckBox Content="Desglosado" IsChecked="{Binding RepComprasEsDesglosado}" FontWeight="SemiBold" FontSize="11"/>
-                  </StackPanel>
-
-                  <!-- Botón Generar Reporte -->
-                  <Button Grid.Row="0" Grid.Column="10" Content="Generar Reporte" Style="{StaticResource PrimaryButton}" VerticalAlignment="Bottom" Height="30" Padding="14,0"
-                          Command="{Binding GenerarReporteComprasCommand}"/>
-                </Grid>
-              </Border>
-
-              <!-- Tabla de Compras (Exacto a grdNoDesglozado y grdDesglozado) -->
-              <Border Style="{StaticResource Card}" Margin="0,0,0,25">
-                <StackPanel>
-                  <DockPanel Margin="0,0,0,10">
-                    <TextBlock Text="{Binding ReporteComprasList.Count, StringFormat='Registros: {0}'}" FontSize="11" Foreground="#718096" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBlock Text="Resultados de Compras Realizadas" Style="{StaticResource CardTitle}" Margin="0"/>
-                  </DockPanel>
-
-                  <DataGrid ItemsSource="{Binding ReporteComprasList}" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True"
-                            HeadersVisibility="Column" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="{StaticResource Sand100Brush}"
-                            Background="White" RowBackground="White" RowHeight="44" BorderThickness="0"
-                            MaxHeight="520" EnableRowVirtualization="True"
-                            VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling"
-                            VirtualizingPanel.ScrollUnit="Pixel" ScrollViewer.CanContentScroll="True">
-                    <DataGrid.Columns>
-                      <DataGridTextColumn Header="NÚMERO DE FACTURA" Binding="{Binding NumeroFactura}" Width="150" FontWeight="Bold"/>
-                      <DataGridTemplateColumn Header="PROVEEDOR" Width="2*">
-                        <DataGridTemplateColumn.CellTemplate>
-                          <DataTemplate>
-                            <TextBlock Text="{Binding NombreProveedor}" FontWeight="SemiBold" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" ToolTip="{Binding NombreProveedor}"/>
-                          </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                      </DataGridTemplateColumn>
-                      <DataGridTextColumn Header="FECHA DE COMPRA" Binding="{Binding FechaCompra}" Width="130"/>
-                      <DataGridTextColumn Header="IVA" Binding="{Binding IVAFactura, StringFormat=C}" Width="100"/>
-                      <DataGridTextColumn Header="SUBTOTAL" Binding="{Binding SubtotalFactura, StringFormat=C}" Width="120"/>
-                      <DataGridTextColumn Header="TOTAL" Binding="{Binding TotalFactura, StringFormat=C}" Width="130" FontWeight="Bold"/>
-                      <DataGridTextColumn Header="TIPO COMPRA" Binding="{Binding TipoCompra}" Width="130"/>
-                    </DataGrid.Columns>
-                  </DataGrid>
-                </StackPanel>
-              </Border>
-            </StackPanel>
-          </Border>
-
-          <!-- ======================================================== -->
-          <!-- 11. VISTA: REPORTE ENTREGA DE MEDICAMENTOS (ReporteEntregaMedicamentos - Captura 101338) -->
-          <!-- ======================================================== -->
-          <Border Style="{StaticResource ReporteEntregasViewStyle}">
-            <StackPanel>
-              <!-- Cabecera -->
-              <DockPanel Margin="0,0,0,16">
-                <Button DockPanel.Dock="Right" Content="📥 Exportar a Excel" Style="{StaticResource OutlineButton}"
-                        Command="{Binding ExportarReporteEntregasExcelCommand}"/>
-                <StackPanel>
-                  <TextBlock Text="Reporte de Entrega de Medicamentos (Ventanilla)" FontFamily="Georgia" FontSize="22" FontWeight="Bold" Foreground="{StaticResource Wine950Brush}"/>
-                  <TextBlock Text="Histórico auditable de salidas por ticket, receta, derechohabiente y validación de cuadro básico." Opacity="0.65" FontSize="12" Margin="0,2,0,0"/>
-                </StackPanel>
-              </DockPanel>
-
-              <!-- Barra de Filtros (Exacto a ReporteEntregaMedicamentos Captura 101338) -->
-              <Border Style="{StaticResource Card}" Margin="0,0,0,16" Padding="14">
-                <Grid>
-                  <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="10"/>
-                    <RowDefinition Height="Auto"/>
-                  </Grid.RowDefinitions>
-                  <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="130"/>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="130"/>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="110"/>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="140"/>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="90"/>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="105"/>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="Auto"/>
-                  </Grid.ColumnDefinitions>
-
-                  <!-- Fecha Desde -->
-                  <StackPanel Grid.Row="0" Grid.Column="0">
-                    <TextBlock Text="FECHA INICIAL:" Style="{StaticResource Caption}"/>
-                    <DatePicker SelectedDate="{Binding RepEntregasFechaDesde, UpdateSourceTrigger=PropertyChanged}" Height="28" Margin="0,3,0,0"/>
-                  </StackPanel>
-
-                  <!-- Fecha Fin -->
-                  <StackPanel Grid.Row="0" Grid.Column="2">
-                    <TextBlock Text="FECHA FIN:" Style="{StaticResource Caption}"/>
-                    <DatePicker SelectedDate="{Binding RepEntregasFechaHasta, UpdateSourceTrigger=PropertyChanged}" Height="28" Margin="0,3,0,0"/>
-                  </StackPanel>
-
-                  <!-- Receta -->
-                  <StackPanel Grid.Row="0" Grid.Column="4">
-                    <TextBlock Text="RECETA:" Style="{StaticResource Caption}"/>
-                    <TextBox Text="{Binding RepEntregasReceta, UpdateSourceTrigger=PropertyChanged}" Height="28" Padding="6,3" Margin="0,3,0,0"/>
-                  </StackPanel>
-
-                  <!-- Cod. Barras -->
-                  <StackPanel Grid.Row="0" Grid.Column="6">
-                    <TextBlock Text="CÓDIGO BARRAS:" Style="{StaticResource Caption}"/>
-                    <TextBox Text="{Binding RepEntregasCodigo, UpdateSourceTrigger=PropertyChanged}" Height="28" Padding="6,3" Margin="0,3,0,0"/>
-                  </StackPanel>
-
-                  <!-- Descripción -->
-                  <StackPanel Grid.Row="0" Grid.Column="8">
-                    <TextBlock Text="DESCRIPCIÓN:" Style="{StaticResource Caption}"/>
-                    <TextBox Text="{Binding RepEntregasDescripcion, UpdateSourceTrigger=PropertyChanged}" Height="28" Padding="6,3" Margin="0,3,0,0"/>
-                  </StackPanel>
-
-                  <!-- ID Derechohabiente -->
-                  <StackPanel Grid.Row="0" Grid.Column="10">
-                    <TextBlock Text="ID DERECH.:" Style="{StaticResource Caption}"/>
-                    <TextBox Text="{Binding RepEntregasIdDerech, UpdateSourceTrigger=PropertyChanged}" Height="28" Padding="6,3" Margin="0,3,0,0"/>
-                  </StackPanel>
-
-                  <!-- Nombre -->
-                  <StackPanel Grid.Row="0" Grid.Column="12">
-                    <TextBlock Text="NOMBRE:" Style="{StaticResource Caption}"/>
-                    <TextBox Text="{Binding RepEntregasNombre, UpdateSourceTrigger=PropertyChanged}" Height="28" Padding="6,3" Margin="0,3,0,0"/>
-                  </StackPanel>
-
-                  <!-- CheckBox Cuadro Básico -->
-                  <StackPanel Grid.Row="0" Grid.Column="14" VerticalAlignment="Center" Margin="0,14,0,0">
-                    <CheckBox Content="Cuadro Básico" IsChecked="{Binding RepEntregasCuadroBasico}" FontWeight="SemiBold" FontSize="10"/>
-                  </StackPanel>
-
-                  <!-- Botón Buscar -->
-                  <Button Grid.Row="0" Grid.Column="16" Content="BUSCAR" Style="{StaticResource PrimaryButton}" VerticalAlignment="Bottom" Height="28" Padding="14,0"
-                          Command="{Binding BuscarReporteEntregasCommand}"/>
-                </Grid>
-              </Border>
-
-              <!-- Tabla de Resultados (Exacto a gdrHistorial) -->
-              <Border Style="{StaticResource Card}" Margin="0,0,0,25">
-                <StackPanel>
-                  <DockPanel Margin="0,0,0,10">
-                    <TextBlock Text="{Binding RepEntregasTotalReg, StringFormat='Registros encontrados: {0}'}" FontSize="11" Foreground="#718096" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBlock Text="Historial de Entregas de Medicamento" Style="{StaticResource CardTitle}" Margin="0"/>
-                  </DockPanel>
-
-                  <DataGrid ItemsSource="{Binding ReporteEntregasList}" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True"
-                            HeadersVisibility="Column" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="{StaticResource Sand100Brush}"
-                            Background="White" RowBackground="White" RowHeight="44" BorderThickness="0"
-                            MaxHeight="520" EnableRowVirtualization="True"
-                            VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling"
-                            VirtualizingPanel.ScrollUnit="Pixel" ScrollViewer.CanContentScroll="True">
-                    <DataGrid.Columns>
-                      <DataGridTextColumn Header="#. TICKET" Binding="{Binding NumeroTicket}" Width="105" FontWeight="Bold"/>
-                      <DataGridTextColumn Header="FECHA" Binding="{Binding Fecha}" Width="120"/>
-                      <DataGridTextColumn Header="CANTIDAD" Binding="{Binding Cantidad}" Width="85" FontWeight="Bold"/>
-                      <DataGridTextColumn Header="ID MEDIC." Binding="{Binding ID_Medicamento}" Width="85"/>
-                      <DataGridTextColumn Header="CÓDIGO" Binding="{Binding Codigo}" Width="120"/>
-                      <DataGridTemplateColumn Header="DESCRIPCIÓN" Width="2*">
-                        <DataGridTemplateColumn.CellTemplate>
-                          <DataTemplate>
-                            <TextBlock Text="{Binding Descripcion}" FontWeight="SemiBold" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" ToolTip="{Binding Descripcion}"/>
-                          </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                      </DataGridTemplateColumn>
-                      <DataGridTextColumn Header="ID DERECH." Binding="{Binding ID_Derechohabiente}" Width="95"/>
-                      <DataGridTemplateColumn Header="NOMBRE PACIENTE" Width="1.5*">
-                        <DataGridTemplateColumn.CellTemplate>
-                          <DataTemplate>
-                            <TextBlock Text="{Binding Nombre}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" ToolTip="{Binding Nombre}"/>
-                          </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                      </DataGridTemplateColumn>
-                      <DataGridTextColumn Header="RECETA" Binding="{Binding Receta}" Width="110" FontWeight="SemiBold"/>
-                    </DataGrid.Columns>
-                  </DataGrid>
-                </StackPanel>
-              </Border>
-            </StackPanel>
-          </Border>
-
-          <!-- ======================================================== -->
-          <!-- 12. VISTA: REPORTE ENTRADAS DE MEDICAMENTO (EntradaDeMedicamentos - Captura 101347) -->
-          <!-- ======================================================== -->
-          <Border Style="{StaticResource ReporteEntradasViewStyle}">
-            <StackPanel>
-              <!-- Cabecera -->
-              <DockPanel Margin="0,0,0,16">
-                <Button DockPanel.Dock="Right" Content="📥 Exportar a Excel" Style="{StaticResource OutlineButton}"
-                        Command="{Binding ExportarReporteEntradasExcelCommand}"/>
-                <StackPanel>
-                  <TextBlock Text="Reporte de Entradas de Medicamentos (Lotes &amp; Facturas)" FontFamily="Georgia" FontSize="22" FontWeight="Bold" Foreground="{StaticResource Wine950Brush}"/>
-                  <TextBlock Text="Histórico detallado por renglón de facturas de compra, precios unitarios, IVA, caducidades y lotes." Opacity="0.65" FontSize="12" Margin="0,2,0,0"/>
-                </StackPanel>
-              </DockPanel>
-
-              <!-- Barra de Filtros (Exacto a EntradaDeMedicamentos Captura 101347) -->
-              <Border Style="{StaticResource Card}" Margin="0,0,0,16" Padding="14">
-                <Grid>
-                  <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="10"/>
-                    <RowDefinition Height="Auto"/>
-                  </Grid.RowDefinitions>
-                  <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="130"/>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="130"/>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="110"/>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="130"/>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="Auto"/>
-                  </Grid.ColumnDefinitions>
-
-                  <!-- Fecha Inicial -->
-                  <StackPanel Grid.Row="0" Grid.Column="0">
-                    <TextBlock Text="FECHA DE COMPRA:" Style="{StaticResource Caption}"/>
-                    <DatePicker SelectedDate="{Binding RepEntradasFechaDesde, UpdateSourceTrigger=PropertyChanged}" Height="28" Margin="0,3,0,0"/>
-                  </StackPanel>
-
-                  <!-- Fecha Fin -->
-                  <StackPanel Grid.Row="0" Grid.Column="2">
-                    <TextBlock Text="FECHA FIN:" Style="{StaticResource Caption}"/>
-                    <DatePicker SelectedDate="{Binding RepEntradasFechaHasta, UpdateSourceTrigger=PropertyChanged}" Height="28" Margin="0,3,0,0"/>
-                  </StackPanel>
-
-                  <!-- Factura -->
-                  <StackPanel Grid.Row="0" Grid.Column="4">
-                    <TextBlock Text="FACTURA:" Style="{StaticResource Caption}"/>
-                    <TextBox Text="{Binding RepEntradasFactura, UpdateSourceTrigger=PropertyChanged}" Height="28" Padding="6,3" Margin="0,3,0,0"/>
-                  </StackPanel>
-
-                  <!-- Proveedor -->
-                  <StackPanel Grid.Row="0" Grid.Column="6">
-                    <TextBlock Text="PROVEEDOR:" Style="{StaticResource Caption}"/>
-                    <TextBox Text="{Binding RepEntradasProveedor, UpdateSourceTrigger=PropertyChanged}" Height="28" Padding="6,3" Margin="0,3,0,0"/>
-                  </StackPanel>
-
-                  <!-- Código Barras -->
-                  <StackPanel Grid.Row="0" Grid.Column="8">
-                    <TextBlock Text="CÓDIGO BARRAS:" Style="{StaticResource Caption}"/>
-                    <TextBox Text="{Binding RepEntradasCodigo, UpdateSourceTrigger=PropertyChanged}" Height="28" Padding="6,3" Margin="0,3,0,0"/>
-                  </StackPanel>
-
-                  <!-- Descripción -->
-                  <StackPanel Grid.Row="0" Grid.Column="10">
-                    <TextBlock Text="DESCRIPCIÓN:" Style="{StaticResource Caption}"/>
-                    <TextBox Text="{Binding RepEntradasDescripcion, UpdateSourceTrigger=PropertyChanged}" Height="28" Padding="6,3" Margin="0,3,0,0"/>
-                  </StackPanel>
-
-                  <!-- Botón Buscar -->
-                  <Button Grid.Row="0" Grid.Column="12" Content="BUSCAR" Style="{StaticResource PrimaryButton}" VerticalAlignment="Bottom" Height="28" Padding="14,0"
-                          Command="{Binding BuscarReporteEntradasCommand}"/>
-                </Grid>
-              </Border>
-
-              <!-- Tabla de Entradas Detalladas (Exacto a gdrEntradaMedicamentos con LOTE y Caducidad) -->
-              <Border Style="{StaticResource Card}" Margin="0,0,0,25">
-                <StackPanel>
-                  <DockPanel Margin="0,0,0,10">
-                    <TextBlock Text="{Binding RepEntradasTotalReg, StringFormat='Renglones encontrados: {0}'}" FontSize="11" Foreground="#718096" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBlock Text="Detalle de Entradas de Medicamentos Registradas" Style="{StaticResource CardTitle}" Margin="0"/>
-                  </DockPanel>
-
-                  <DataGrid ItemsSource="{Binding ReporteEntradasList}" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True"
-                            HeadersVisibility="Column" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="{StaticResource Sand100Brush}"
-                            Background="White" RowBackground="White" RowHeight="44" BorderThickness="0"
-                            MaxHeight="520" EnableRowVirtualization="True"
-                            VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling"
-                            VirtualizingPanel.ScrollUnit="Pixel" ScrollViewer.CanContentScroll="True">
-                    <DataGrid.Columns>
-                      <DataGridTextColumn Header="#. FACTURA" Binding="{Binding NumeroFactura}" Width="120" FontWeight="Bold"/>
-                      <DataGridTemplateColumn Header="PROVEEDOR" Width="1.5*">
-                        <DataGridTemplateColumn.CellTemplate>
-                          <DataTemplate>
-                            <TextBlock Text="{Binding Proveedor}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" ToolTip="{Binding Proveedor}"/>
-                          </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                      </DataGridTemplateColumn>
-                      <DataGridTextColumn Header="FECHA COMPRA" Binding="{Binding FechaCompra}" Width="115"/>
-                      <DataGridTextColumn Header="CÓDIGO DE BARRAS" Binding="{Binding CodigoBarras}" Width="125"/>
-                      <DataGridTemplateColumn Header="DESCRIPCIÓN" Width="2*">
-                        <DataGridTemplateColumn.CellTemplate>
-                          <DataTemplate>
-                            <TextBlock Text="{Binding Descripcion}" FontWeight="SemiBold" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" ToolTip="{Binding Descripcion}"/>
-                          </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                      </DataGridTemplateColumn>
-                      <DataGridTextColumn Header="RENGLÓN" Binding="{Binding Renglon}" Width="75"/>
-                      <DataGridTextColumn Header="CANTIDAD" Binding="{Binding Cantidad}" Width="80" FontWeight="Bold"/>
-                      <DataGridTextColumn Header="PRECIO UNIT." Binding="{Binding PrecioUnitario, StringFormat=C}" Width="100"/>
-                      <DataGridTextColumn Header="IVA" Binding="{Binding IVA, StringFormat=C}" Width="80"/>
-                      <DataGridTextColumn Header="SUBTOTAL" Binding="{Binding Subtotal, StringFormat=C}" Width="100" FontWeight="Bold"/>
-                      <DataGridTextColumn Header="FECHA CAD." Binding="{Binding FechaCaducidad}" Width="100"/>
-                      <DataGridTextColumn Header="LOTE" Binding="{Binding Lote}" Width="105" FontWeight="Bold"/>
-                    </DataGrid.Columns>
-                  </DataGrid>
-                </StackPanel>
-              </Border>
-            </StackPanel>
-          </Border>
-
-          <!-- ======================================================== -->
-          <!-- 13. VISTA: GESTIÓN DE USUARIOS Y PERFILES (Frm_Usuarios - SÓLO ADMIN) -->
-          <!-- ======================================================== -->
-          <Border Style="{StaticResource UsuariosViewStyle}">
-            <StackPanel Margin="0,0,0,25">
-              <!-- Cabecera -->
-              <DockPanel Margin="0,0,0,16">
-                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
-                  <Border Background="#FEFCBF" BorderBrush="#ECC94B" BorderThickness="1" CornerRadius="6" Padding="10,6" Margin="0,0,10,0">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                      <TextBlock Text="🧪 " FontSize="12"/>
-                      <TextBlock Text="IUBIDB_FARMACIAS_PRUEBAS" FontWeight="Bold" FontSize="11" Foreground="#744210"/>
-                    </StackPanel>
-                  </Border>
-                  <Button Content="➕ Crear Usuario Nuevo" Style="{StaticResource PrimaryButton}" Margin="0,0,10,0" Command="{Binding AbrirModalNuevoUsuarioCommand}"/>
-                  <Button Content="🔄 Recargar Usuarios" Style="{StaticResource OutlineButton}" Command="{Binding CargarUsuariosSistemaCommand}"/>
-                </StackPanel>
-
-                <StackPanel>
-                  <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock Text="Gestión Institucional de Usuarios y Perfiles" FontFamily="Georgia" FontSize="22" FontWeight="Bold" Foreground="{StaticResource Wine950Brush}"/>
-                    <Border Background="{StaticResource Gold100Brush}" BorderBrush="{StaticResource Gold500Brush}" BorderThickness="1" CornerRadius="4" Padding="8,2" Margin="10,0,0,0" VerticalAlignment="Center">
-                      <TextBlock Text="SÓLO ADMINISTRADOR" FontSize="10" FontWeight="Bold" Foreground="{StaticResource Wine900Brush}"/>
-                    </Border>
-                  </StackPanel>
-                  <TextBlock Text="Administración de cuentas en Frm_Usuarios, asignación de perfiles operativos, cambio seguro de contraseñas y control de estatus." Opacity="0.65" FontSize="12" Margin="0,2,0,0"/>
-                </StackPanel>
-              </DockPanel>
-
-              <!-- Barra de Búsqueda y Filtro de Usuarios -->
-              <Border Style="{StaticResource Card}" Padding="14,10" Margin="0,0,0,14">
-                <DockPanel>
-                  <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
-                    <Border Background="{StaticResource Sand50Brush}" BorderBrush="{StaticResource Sand100Brush}" BorderThickness="1" CornerRadius="4" Padding="10,4">
-                      <TextBlock FontSize="11" Foreground="{StaticResource Wine900Brush}" FontWeight="SemiBold">
-                        <Run Text="{Binding UsuariosSistemaFiltrados.Count, Mode=OneWay}" FontWeight="Bold"/>
-                        <Run Text=" usuarios registrados"/>
-                      </TextBlock>
-                    </Border>
-                  </StackPanel>
-
-                  <TextBlock DockPanel.Dock="Left" Text="🔍" FontSize="14" Margin="0,0,10,0" VerticalAlignment="Center"/>
-                  <TextBox Text="{Binding FiltroUsuariosTexto, UpdateSourceTrigger=PropertyChanged}"
-                           FontSize="12.5" Padding="8,4" BorderBrush="{StaticResource Sand100Brush}"
-                           ToolTip="Filtrar por usuario, nombre completo, perfil o email"/>
-                </DockPanel>
-              </Border>
-
-              <!-- Área Principal: Tabla de Usuarios (Izquierda) + Editor de Perfil y Contraseña (Derecha) -->
-              <Grid>
-                <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width="*"/>
-                  <ColumnDefinition Width="16"/>
-                  <ColumnDefinition Width="420"/>
-                </Grid.ColumnDefinitions>
-
-                <!-- Columna Izquierda: Tabla del Padrón de Usuarios -->
-                <Border Grid.Column="0" Style="{StaticResource Card}" Padding="14">
-                  <StackPanel>
-                    <DockPanel Margin="0,0,0,10">
-                      <TextBlock Text="Catálogo Institucional de Usuarios (Frm_Usuarios)" Style="{StaticResource CardTitle}" Margin="0"/>
-                      <TextBlock Text="Seleccione un usuario para modificar su perfil o contraseña" FontSize="11" Foreground="#718096" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    </DockPanel>
-
-                    <DataGrid ItemsSource="{Binding UsuariosSistemaFiltrados}" SelectedItem="{Binding UsuarioGestionSeleccionado}"
-                              AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True"
-                              HeadersVisibility="Column" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="{StaticResource Sand100Brush}"
-                              Background="White" RowBackground="White" RowHeight="46" BorderThickness="0"
-                              MaxHeight="540" EnableRowVirtualization="True">
-                      <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding IdUsuario}" Width="50"/>
-                        <DataGridTextColumn Header="USUARIO" Binding="{Binding Usuario}" Width="110" FontWeight="Bold"/>
-                        <DataGridTemplateColumn Header="NOMBRE COMPLETO" Width="*">
-                          <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                              <StackPanel VerticalAlignment="Center">
-                                <TextBlock Text="{Binding Nombre}" FontWeight="SemiBold" FontSize="12" TextTrimming="CharacterEllipsis"/>
-                                <TextBlock Text="{Binding Email}" FontSize="9.5" Foreground="#718096" TextTrimming="CharacterEllipsis"/>
-                              </StackPanel>
-                            </DataTemplate>
-                          </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <DataGridTemplateColumn Header="PERFIL OPERATIVO" Width="150">
-                          <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                              <Border Background="{Binding PerfilColor}" CornerRadius="4" Padding="8,3" HorizontalAlignment="Left">
-                                <TextBlock Text="{Binding Perfil}" FontSize="10" FontWeight="Bold" Foreground="White"/>
-                              </Border>
-                            </DataTemplate>
-                          </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <DataGridTemplateColumn Header="ESTATUS" Width="95">
-                          <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                              <Border Background="{Binding EstatusColor}" CornerRadius="4" Padding="6,2" HorizontalAlignment="Center">
-                                <TextBlock Text="{Binding EstatusTexto}" FontSize="10" FontWeight="Bold" Foreground="White"/>
-                              </Border>
-                            </DataTemplate>
-                          </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <DataGridTemplateColumn Header="ACCIÓN" Width="120">
-                          <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                              <Button Content="Alternar Estatus" Style="{StaticResource SoftButton}" FontSize="10" Padding="6,3"
-                                      Command="{Binding DataContext.AlternarEstatusUsuarioCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                      CommandParameter="{Binding}" HorizontalAlignment="Center"/>
-                            </DataTemplate>
-                          </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                      </DataGrid.Columns>
-                    </DataGrid>
-                  </StackPanel>
-                </Border>
-
-                <!-- Columna Derecha: Panel de Modificación de Perfil y Contraseña -->
-                <Border Grid.Column="2" Style="{StaticResource Card}" Background="#FAF5F0" BorderBrush="{StaticResource Sand100Brush}" Padding="18">
-                  <StackPanel>
-                    <TextBlock Text="ADMINISTRAR USUARIO SELECCIONADO" Style="{StaticResource Caption}" Margin="0,0,0,8"/>
-
-                    <!-- Ficha del Usuario -->
-                    <Border Background="White" BorderBrush="{StaticResource Sand100Brush}" BorderThickness="1" CornerRadius="8" Padding="14" Margin="0,0,0,16">
-                      <Grid>
-                        <Grid.ColumnDefinitions>
-                          <ColumnDefinition Width="50"/>
-                          <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Border Grid.Column="0" Width="42" Height="42" Background="{StaticResource Wine900Brush}" CornerRadius="21" HorizontalAlignment="Left" VerticalAlignment="Center">
-                          <TextBlock Text="👤" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                          <TextBlock Text="{Binding UsuarioGestionSeleccionado.Nombre, FallbackValue='(Seleccione un usuario)'}" FontWeight="Bold" FontSize="13.5" Foreground="{StaticResource InkBrush}" TextTrimming="CharacterEllipsis"/>
-                          <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
-                            <TextBlock Text="{Binding UsuarioGestionSeleccionado.Usuario, StringFormat='@ {0}'}" FontSize="11" FontWeight="SemiBold" Foreground="{StaticResource Wine900Brush}" Margin="0,0,8,0"/>
-                            <Border Background="{Binding UsuarioGestionSeleccionado.PerfilColor}" CornerRadius="3" Padding="6,1" Margin="0,0,6,0">
-                              <TextBlock Text="{Binding UsuarioGestionSeleccionado.Perfil}" FontSize="9" FontWeight="Bold" Foreground="White"/>
-                            </Border>
-                            <Border Background="{Binding UsuarioGestionSeleccionado.EstatusColor}" CornerRadius="3" Padding="6,1">
-                              <TextBlock Text="{Binding UsuarioGestionSeleccionado.EstatusTexto}" FontSize="9" FontWeight="Bold" Foreground="White"/>
-                            </Border>
-                          </StackPanel>
-                        </StackPanel>
-                      </Grid>
-                    </Border>
-
-                    <!-- Módulo 1: Asignar Nuevo Perfil -->
-                    <Border Background="White" BorderBrush="{StaticResource Sand100Brush}" BorderThickness="1" CornerRadius="8" Padding="14" Margin="0,0,0,14">
-                      <StackPanel>
-                        <TextBlock Text="1. PERFIL OPERATIVO INSTITUCIONAL" FontWeight="Bold" FontSize="11.5" Foreground="{StaticResource Wine900Brush}" Margin="0,0,0,4"/>
-                        <TextBlock Text="Define los módulos a los que el usuario tiene acceso en el menú lateral." FontSize="10" Foreground="#718096" Margin="0,0,0,8"/>
-
-                        <TextBlock Text="PERFIL A ASIGNAR:" Style="{StaticResource Caption}" Margin="0,0,0,3"/>
-                        <ComboBox ItemsSource="{Binding PerfilesDisponibles}" SelectedItem="{Binding NuevoPerfilSeleccionado}"
-                                  Padding="8,6" FontSize="12" Margin="0,0,0,10"/>
-
-                        <Button Content="💾 Guardar Nuevo Perfil" Style="{StaticResource PrimaryButton}" HorizontalAlignment="Stretch"
-                                Command="{Binding GuardarPerfilUsuarioCommand}"/>
-                      </StackPanel>
-                    </Border>
-
-                    <!-- Módulo 2: Cambiar Contraseña Criptográfica -->
-                    <Border Background="White" BorderBrush="{StaticResource Sand100Brush}" BorderThickness="1" CornerRadius="8" Padding="14" Margin="0,0,0,14">
-                      <StackPanel>
-                        <TextBlock Text="2. CONTRASEÑA DE ACCESO (PBKDF2 SHA-1)" FontWeight="Bold" FontSize="11.5" Foreground="{StaticResource Wine900Brush}" Margin="0,0,0,4"/>
-                        <TextBlock Text="Cifra la contraseña con 1000 iteraciones y salt único de 24 bytes." FontSize="10" Foreground="#718096" Margin="0,0,0,8"/>
-
-                        <TextBlock Text="NUEVA CONTRASEÑA:" Style="{StaticResource Caption}" Margin="0,0,0,3"/>
-                        <TextBox Text="{Binding NuevaContraseniaInput, UpdateSourceTrigger=PropertyChanged}"
-                                 Padding="8,6" FontSize="12" Margin="0,0,0,10"/>
-
-                        <Button Content="🔑 Actualizar Contraseña Institucional" Style="{StaticResource GoldButton}" HorizontalAlignment="Stretch"
-                                Command="{Binding GuardarContraseniaUsuarioCommand}"/>
-                      </StackPanel>
-                    </Border>
-
-                    <!-- Módulo 3: Alternar Estatus -->
-                    <Border Background="White" BorderBrush="{StaticResource Sand100Brush}" BorderThickness="1" CornerRadius="8" Padding="14">
-                      <DockPanel>
-                        <Button DockPanel.Dock="Right" Content="Alternar Estatus" Style="{StaticResource OutlineButton}" Padding="12,6"
-                                Command="{Binding AlternarEstatusUsuarioCommand}" CommandParameter="{Binding UsuarioGestionSeleccionado}"/>
-                        <StackPanel VerticalAlignment="Center">
-                          <TextBlock Text="3. ESTATUS DE LA CUENTA" FontWeight="Bold" FontSize="11.5" Foreground="{StaticResource Wine900Brush}"/>
-                          <TextBlock Text="Permitir o denegar el inicio de sesión del usuario." FontSize="10" Foreground="#718096"/>
-                        </StackPanel>
-                      </DockPanel>
-                    </Border>
-                  </StackPanel>
-                </Border>
-              </Grid>
-            </StackPanel>
-          </Border>
         </Grid>
       </ScrollViewer>
     </Grid>
@@ -3052,7 +1691,7 @@
             </DockPanel>
             <DockPanel Margin="0,2">
               <TextBlock DockPanel.Dock="Right" Text="{Binding TicketActual.Absorcion, StringFormat='- {0:C}'}" FontSize="11" Foreground="#2F855A" FontWeight="SemiBold"/>
-              <TextBlock Text="APOYO IPECOL (PRESTACIÓN):" FontSize="10" Foreground="#2F855A"/>
+              <TextBlock Text="APOYO IPECOL (PRESTACIÓN 71.46%):" FontSize="10" Foreground="#2F855A"/>
             </DockPanel>
             <DockPanel Margin="0,4,0,2">
               <TextBlock DockPanel.Dock="Right" Text="{Binding TicketActual.AportacionPaciente, StringFormat=C}" FontSize="14" FontWeight="Bold" Foreground="{StaticResource Wine900Brush}"/>
@@ -3301,141 +1940,6 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
           <Button Content="Cancelar" Style="{StaticResource OutlineButton}" Command="{Binding CerrarModalNuevoMedicamentoCommand}" Margin="0,0,10,0"/>
           <Button Content="Guardar Fármaco" Style="{StaticResource PrimaryButton}" Command="{Binding GuardarNuevoMedicamentoCommand}"/>
-        </StackPanel>
-      </StackPanel>
-    </Border>
-
-    <!-- 8. MODAL HISTORIAL DE ENTREGAS 15 DÍAS (MedicineOutputWindow txtHistory) -->
-    <Border Visibility="{Binding EsModalHistorial15DiasVisible, Converter={StaticResource BoolToVis}}"
-            Background="White" CornerRadius="12" BorderBrush="{StaticResource Wine900Brush}" BorderThickness="1.5"
-            Padding="22" Width="680" MaxHeight="600" VerticalAlignment="Center" HorizontalAlignment="Center">
-      <StackPanel>
-        <DockPanel Margin="0,0,0,14">
-          <Button DockPanel.Dock="Right" Content="✕" Style="{StaticResource OutlineButton}" Padding="8,4"
-                  Command="{Binding CerrarModalHistorial15DiasCommand}"/>
-          <StackPanel>
-            <TextBlock Text="📋 Entregas en los Últimos 15 Días" FontFamily="Georgia" FontSize="18" FontWeight="Bold" Foreground="{StaticResource Wine950Brush}"/>
-            <TextBlock FontSize="11" Foreground="#718096" Margin="0,2,0,0">
-              <Run Text="Derechohabiente: "/>
-              <Run Text="{Binding PacienteNombre}" FontWeight="Bold" Foreground="{StaticResource Wine900Brush}"/>
-              <Run Text=" · "/>
-              <Run Text="{Binding Carnet}"/>
-            </TextBlock>
-          </StackPanel>
-        </DockPanel>
-
-        <Border Background="{StaticResource Sand50Brush}" BorderBrush="{StaticResource Sand100Brush}" BorderThickness="1" CornerRadius="8" Padding="6" Margin="0,0,0,14" MaxHeight="400">
-          <DataGrid ItemsSource="{Binding HistorialEntregas15Dias}" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True"
-                    GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="{StaticResource Sand100Brush}"
-                    HeadersVisibility="Column" BorderThickness="0" Background="Transparent" RowHeight="38">
-            <DataGrid.Columns>
-              <DataGridTextColumn Header="FECHA" Binding="{Binding Fecha}" Width="95"/>
-              <DataGridTextColumn Header="RECETA" Binding="{Binding NumeroReceta}" Width="85"/>
-              <DataGridTextColumn Header="MEDICAMENTO DISPENSADO" Binding="{Binding Medicamento}" Width="*"/>
-              <DataGridTextColumn Header="CANT." Binding="{Binding Cantidad}" Width="55"/>
-              <DataGridTextColumn Header="MÉDICO" Binding="{Binding Medico}" Width="150"/>
-              <DataGridTextColumn Header="TICKET" Binding="{Binding FolioTicket}" Width="80"/>
-            </DataGrid.Columns>
-          </DataGrid>
-        </Border>
-
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-          <Button Content="Cerrar Historial" Style="{StaticResource PrimaryButton}" Command="{Binding CerrarModalHistorial15DiasCommand}"/>
-        </StackPanel>
-      </StackPanel>
-    </Border>
-
-    <!-- 9. MODAL ALTA DE BENEFICIARIO (AddBeneficiaryWindow) -->
-    <Border Visibility="{Binding EsModalNuevoBeneficiarioVisible, Converter={StaticResource BoolToVis}}"
-            Background="White" CornerRadius="12" BorderBrush="{StaticResource Wine900Brush}" BorderThickness="1.5"
-            Padding="22" Width="460" VerticalAlignment="Center" HorizontalAlignment="Center">
-      <StackPanel>
-        <DockPanel Margin="0,0,0,14">
-          <Button DockPanel.Dock="Right" Content="✕" Style="{StaticResource OutlineButton}" Padding="8,4"
-                  Command="{Binding CerrarModalNuevoBeneficiarioCommand}"/>
-          <TextBlock Text="👥 Alta de Beneficiario Familiar" FontFamily="Georgia" FontSize="18" FontWeight="Bold" Foreground="{StaticResource Wine950Brush}"/>
-        </DockPanel>
-
-        <Border Background="{StaticResource Sand50Brush}" CornerRadius="6" Padding="10,6" Margin="0,0,0,12">
-          <TextBlock FontSize="11" Foreground="{StaticResource Wine900Brush}">
-            <Run Text="Titular Asociado: " FontWeight="Bold"/>
-            <Run Text="{Binding PacienteNombre}"/>
-            <Run Text=" ("/><Run Text="{Binding Carnet}"/><Run Text=")"/>
-          </TextBlock>
-        </Border>
-
-        <TextBlock Text="PARENTESCO" Style="{StaticResource Caption}" Margin="0,0,0,3"/>
-        <ComboBox SelectedValue="{Binding NuevoBeneficiarioParentesco}" SelectedValuePath="Content" Height="30" FontSize="12" Margin="0,0,0,10">
-          <ComboBoxItem Content="HIJO(A)" IsSelected="True"/>
-          <ComboBoxItem Content="ESPOSO(A) / CONYUGE"/>
-          <ComboBoxItem Content="PADRE / MADRE"/>
-          <ComboBoxItem Content="CONCUBINA(O)"/>
-        </ComboBox>
-
-        <TextBlock Text="NOMBRE COMPLETO DEL BENEFICIARIO" Style="{StaticResource Caption}" Margin="0,0,0,3"/>
-        <TextBox Text="{Binding NuevoBeneficiarioNombre, UpdateSourceTrigger=PropertyChanged}" Height="30" FontSize="12" Margin="0,0,0,10"/>
-
-        <TextBlock Text="CURP" Style="{StaticResource Caption}" Margin="0,0,0,3"/>
-        <TextBox Text="{Binding NuevoBeneficiarioCurp, UpdateSourceTrigger=PropertyChanged}" Height="30" FontSize="12" Margin="0,0,0,16"/>
-
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-          <Button Content="Cancelar" Style="{StaticResource OutlineButton}" Command="{Binding CerrarModalNuevoBeneficiarioCommand}" Margin="0,0,10,0"/>
-          <Button Content="Guardar en Padrón" Style="{StaticResource PrimaryButton}" Command="{Binding GuardarNuevoBeneficiarioCommand}"/>
-        </StackPanel>
-      </StackPanel>
-    </Border>
-
-    <!-- 10. MODAL ALTA DE NUEVO USUARIO DEL SISTEMA (Frm_Usuarios) -->
-    <Border Visibility="{Binding EsModalNuevoUsuarioVisible, Converter={StaticResource BoolToVis}}"
-            Background="White" CornerRadius="12" BorderBrush="{StaticResource Wine900Brush}" BorderThickness="1.5"
-            MaxWidth="500" MinWidth="420" HorizontalAlignment="Center" VerticalAlignment="Center"
-            Padding="22">
-      <Border.Effect>
-        <DropShadowEffect BlurRadius="25" Opacity="0.35" ShadowDepth="4"/>
-      </Border.Effect>
-      <StackPanel>
-        <DockPanel Margin="0,0,0,12">
-          <Button DockPanel.Dock="Right" Content="✕" Style="{StaticResource OutlineButton}" Padding="8,4"
-                  Command="{Binding CerrarModalNuevoUsuarioCommand}"/>
-          <TextBlock Text="👤 Alta de Usuario del Sistema" FontFamily="Georgia" FontSize="18" FontWeight="Bold" Foreground="{StaticResource Wine950Brush}"/>
-        </DockPanel>
-
-        <TextBlock Text="Capture las credenciales y el perfil operativo para el nuevo usuario en Frm_Usuarios." FontSize="11" Foreground="#718096" Margin="0,0,0,12"/>
-
-        <Grid Margin="0,0,0,10">
-          <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="12"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
-          <StackPanel Grid.Column="0">
-            <TextBlock Text="NOMBRE DE USUARIO (LOGIN)" Style="{StaticResource Caption}"/>
-            <TextBox Text="{Binding NuevoUsuarioLogin, UpdateSourceTrigger=PropertyChanged}" Padding="8,5" Margin="0,3,0,0"/>
-          </StackPanel>
-          <StackPanel Grid.Column="2">
-            <TextBlock Text="PERFIL OPERATIVO" Style="{StaticResource Caption}"/>
-            <ComboBox ItemsSource="{Binding PerfilesDisponibles}" SelectedItem="{Binding NuevoUsuarioPerfil}"
-                      Padding="6,4" Height="28" FontSize="11.5" Margin="0,3,0,0"/>
-          </StackPanel>
-        </Grid>
-
-        <TextBlock Text="NOMBRE COMPLETO DE LA PERSONA" Style="{StaticResource Caption}"/>
-        <TextBox Text="{Binding NuevoUsuarioNombre, UpdateSourceTrigger=PropertyChanged}" Padding="8,5" Margin="0,3,0,10"/>
-
-        <TextBlock Text="CORREO ELECTRÓNICO INSTITUCIONAL (OPCIONAL)" Style="{StaticResource Caption}"/>
-        <TextBox Text="{Binding NuevoUsuarioEmail, UpdateSourceTrigger=PropertyChanged}" Padding="8,5" Margin="0,3,0,10"/>
-
-        <Grid Margin="0,0,0,14">
-          <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="12"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
-          <StackPanel Grid.Column="0">
-            <TextBlock Text="CONTRASEÑA" Style="{StaticResource Caption}"/>
-            <TextBox Text="{Binding NuevoUsuarioPassword, UpdateSourceTrigger=PropertyChanged}" Padding="8,5" Margin="0,3,0,0"/>
-          </StackPanel>
-          <StackPanel Grid.Column="2">
-            <TextBlock Text="CONFIRMAR CONTRASEÑA" Style="{StaticResource Caption}"/>
-            <TextBox Text="{Binding NuevoUsuarioConfirmPassword, UpdateSourceTrigger=PropertyChanged}" Padding="8,5" Margin="0,3,0,0"/>
-          </StackPanel>
-        </Grid>
-
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-          <Button Content="Cancelar" Style="{StaticResource OutlineButton}" Command="{Binding CerrarModalNuevoUsuarioCommand}" Margin="0,0,10,0"/>
-          <Button Content="💾 Guardar Usuario" Style="{StaticResource PrimaryButton}" Command="{Binding GuardarNuevoUsuarioCommand}"/>
         </StackPanel>
       </StackPanel>
     </Border>
